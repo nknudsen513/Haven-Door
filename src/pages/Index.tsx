@@ -95,9 +95,9 @@ const Index = () => {
             variants={fadeUp}
             custom={1}
           >
-            Serving with
+            Doors done
             <br />
-            <span className="text-primary">Excellence</span>
+            <span className="text-primary">right.</span>
           </motion.h1>
           <motion.p
             className="mt-6 text-surface-dark-foreground/70 max-w-lg text-lg"
