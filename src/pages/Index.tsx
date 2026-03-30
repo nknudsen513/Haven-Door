@@ -1,49 +1,37 @@
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectSchool from "@/assets/project-school.jpg";
 import projectMedical from "@/assets/project-medical.jpg";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+const fade = {
+  hidden: { opacity: 0, y: 30 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
+    transition: { delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
-
-const services = [
-  "Commercial Doors",
-  "Pre-Hung Doors",
-  "Barn Doors",
-  "Eliason Doors",
-  "Bi-Fold Doors",
-  "All Required Hardware",
-];
 
 const projects = [
   {
     title: "Rocketship Dream Community Prep",
-    date: "July 2022",
-    description:
-      "Joined last minute to help Whiting-Turner meet their deadline before school began. Installed all doors and hardware, and collaborated on a cost-effective temporary hardware solution.",
+    location: "Nashville, TN",
+    scope: "All doors & hardware — last-minute timeline save",
     image: projectSchool,
   },
   {
     title: "Avid / Holiday Inn Dual Hotel",
-    date: "April 2022",
-    description:
-      "A 168-room dual hotel where we installed over 350 doors, frames, and hardware throughout the property.",
+    location: "Tennessee",
+    scope: "350+ doors, frames & hardware across 168 rooms",
     image: projectHotel,
   },
   {
     title: "Meharry Medical Live Learn Center",
-    date: "March 2023",
-    description:
-      "Over 1,200 doors and hardware installed for this 154-room student living center, including pre-hung, solid core, and hollow metal doors.",
+    location: "Nashville, TN",
+    scope: "1,200+ doors installed — pre-hung, solid core & hollow metal",
     image: projectMedical,
   },
 ];
@@ -52,221 +40,230 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-          <span className="font-heading text-xl font-bold tracking-tight">
-            HAVEN DOOR
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg">
+        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-5">
+          <span className="font-heading text-2xl tracking-tight">
+            Haven Door
           </span>
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
+          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+            <a href="#work" className="hover:text-foreground transition-colors">Work</a>
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
-            <a href="#services" className="hover:text-foreground transition-colors">Services</a>
-            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
-          <Button asChild size="sm">
-            <a href="#contact">Get In Touch</a>
+          <Button size="sm" variant="outline" asChild className="rounded-full">
+            <a href="#contact">Get a quote</a>
           </Button>
         </div>
       </nav>
 
       {/* HERO */}
-      <section className="relative min-h-screen flex items-end overflow-hidden">
-        <img
-          src={heroImg}
-          alt="Professional commercial door installation"
-          className="absolute inset-0 w-full h-full object-cover"
-          width={1920}
-          height={1080}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-dark via-surface-dark/60 to-transparent" />
-        <div className="relative z-10 max-w-7xl mx-auto w-full px-6 pb-20 md:pb-28 lg:px-24">
+      <section className="pt-32 pb-20 md:pt-44 md:pb-28 px-6">
+        <div className="max-w-6xl mx-auto">
           <motion.p
-            className="text-primary font-heading font-bold text-sm tracking-widest uppercase mb-4"
+            className="text-primary text-sm font-medium tracking-wide uppercase mb-6"
             initial="hidden"
             animate="visible"
-            variants={fadeUp}
+            variants={fade}
           >
-            Nashville &amp; Beyond
+            Commercial door installation
           </motion.p>
           <motion.h1
-            className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-surface-dark-foreground max-w-3xl"
+            className="font-heading text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-4xl"
             initial="hidden"
             animate="visible"
-            variants={fadeUp}
+            variants={fade}
             custom={1}
           >
-            Doors done
+            We hang doors.
             <br />
-            <span className="text-primary">right.</span>
+            <span className="italic text-primary">Really well.</span>
           </motion.h1>
           <motion.p
-            className="mt-6 text-surface-dark-foreground/70 max-w-lg text-lg"
+            className="mt-8 text-muted-foreground max-w-md text-lg leading-relaxed"
             initial="hidden"
             animate="visible"
-            variants={fadeUp}
+            variants={fade}
             custom={2}
           >
-            Commercial door installation for schools, hotels, medical facilities, and more — since 2018.
+            Schools, hotels, medical centers — if it needs a door, we've probably installed a thousand of them.
           </motion.p>
           <motion.div
-            className="mt-8 flex flex-wrap gap-4"
+            className="mt-10"
             initial="hidden"
             animate="visible"
-            variants={fadeUp}
+            variants={fade}
             custom={3}
           >
-            <Button size="lg" asChild>
-              <a href="#contact">Request a Quote</a>
-            </Button>
-            <Button variant="outline" size="lg" asChild className="border-surface-dark-foreground/30 text-surface-dark-foreground hover:bg-surface-dark-foreground/10">
-              <a href="#projects">View Projects</a>
+            <Button size="lg" asChild className="rounded-full gap-2 px-8">
+              <a href="#contact">
+                Let's talk <ArrowRight className="w-4 h-4" />
+              </a>
             </Button>
           </motion.div>
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" className="section-padding">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-          >
-            <p className="text-primary font-heading font-bold text-sm tracking-widest uppercase mb-3">
-              Who We Are
-            </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold leading-tight">
-              Committed to
-              <br />
-              Excellence
-            </h2>
-            <p className="mt-6 text-muted-foreground leading-relaxed">
-              Haven Door Installation is a leading subcontracting company serving the Nashville area and beyond. Since 2018, we've completed schools, medical facilities, office buildings, hotels, and more with general contractors from Tennessee to South Carolina to Florida.
-            </p>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              We prioritize clear communication, excellence, and integrity in every job — whether it's ten doors or one thousand.
-            </p>
-          </motion.div>
-          <motion.div
-            className="grid grid-cols-2 gap-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            custom={1}
-          >
-            {[
-              { num: "6+", label: "Years Experience" },
-              { num: "1200+", label: "Doors in One Project" },
-              { num: "3", label: "States Served" },
-              { num: "100%", label: "Commitment" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-card rounded-lg p-6 text-center border border-border"
-              >
-                <span className="font-heading text-3xl font-extrabold text-primary">
-                  {stat.num}
-                </span>
-                <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
+      {/* HERO IMAGE */}
+      <section className="px-6">
+        <motion.div
+          className="max-w-6xl mx-auto rounded-2xl overflow-hidden"
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <img
+            src={heroImg}
+            alt="Professional commercial door installation"
+            className="w-full h-[50vh] md:h-[65vh] object-cover"
+            width={1920}
+            height={1080}
+          />
+        </motion.div>
       </section>
 
-      {/* SERVICES */}
-      <section id="services" className="section-padding surface-dark">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-          >
-            <p className="text-primary font-heading font-bold text-sm tracking-widest uppercase mb-3">
-              Professional Services
-            </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold">
-              What We Install
-            </h2>
-          </motion.div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, i) => (
-              <motion.div
-                key={service}
-                className="border border-surface-dark-foreground/10 rounded-lg p-8 hover:border-primary/50 transition-colors"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                custom={i}
-              >
-                <div className="w-10 h-10 rounded-md bg-primary/20 flex items-center justify-center mb-4">
-                  <div className="w-4 h-4 rounded-sm bg-primary" />
-                </div>
-                <h3 className="font-heading text-lg font-bold">{service}</h3>
-              </motion.div>
-            ))}
-          </div>
+      {/* STATS BAR */}
+      <section className="py-16 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+          {[
+            { num: "6+", label: "Years in business" },
+            { num: "1,200+", label: "Doors in one project" },
+            { num: "3", label: "States served" },
+            { num: "350+", label: "Hotel room doors" },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="text-center"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fade}
+              custom={i}
+            >
+              <span className="font-heading text-4xl md:text-5xl text-primary">
+                {stat.num}
+              </span>
+              <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className="section-padding">
-        <div className="max-w-7xl mx-auto">
+      <section id="work" className="section-padding surface-dark">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="mb-14"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={fadeUp}
+            variants={fade}
           >
-            <p className="text-primary font-heading font-bold text-sm tracking-widest uppercase mb-3">
-              Featured Work
+            <p className="text-primary text-sm font-medium tracking-wide uppercase mb-4">
+              Selected work
             </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold">
-              Our Projects
+            <h2 className="font-heading text-4xl md:text-5xl">
+              Projects we're proud of
             </h2>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="space-y-12">
             {projects.map((project, i) => (
               <motion.div
                 key={project.title}
-                className="group rounded-xl overflow-hidden border border-border bg-card"
+                className="grid md:grid-cols-2 gap-6 items-center"
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
+                viewport={{ once: true, margin: "-80px" }}
+                variants={fade}
                 custom={i}
               >
-                <div className="overflow-hidden aspect-[3/2]">
+                <div className={`rounded-xl overflow-hidden ${i % 2 === 1 ? "md:order-2" : ""}`}>
                   <img
                     src={project.image}
                     alt={project.title}
                     loading="lazy"
                     width={960}
                     height={640}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full aspect-[3/2] object-cover hover:scale-[1.03] transition-transform duration-700"
                   />
                 </div>
-                <div className="p-6">
-                  <p className="text-xs text-primary font-bold uppercase tracking-wider mb-2">
-                    {project.date}
-                  </p>
-                  <h3 className="font-heading text-lg font-bold mb-2">
+                <div className={`py-4 ${i % 2 === 1 ? "md:order-1 md:text-right" : ""}`}>
+                  <h3 className="font-heading text-2xl md:text-3xl mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {project.description}
+                  <p className="text-surface-dark-foreground/60 text-sm uppercase tracking-wider mb-2">
+                    {project.location}
+                  </p>
+                  <p className="text-surface-dark-foreground/75 leading-relaxed">
+                    {project.scope}
                   </p>
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" className="section-padding">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+          >
+            <p className="text-primary text-sm font-medium tracking-wide uppercase mb-4">
+              About us
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl leading-tight">
+              Straightforward people doing honest work
+            </h2>
+          </motion.div>
+          <motion.div
+            className="space-y-5 text-muted-foreground leading-relaxed"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+            custom={1}
+          >
+            <p>
+              Haven Door Installation has been serving Nashville and beyond since 2018. We work with general contractors on schools, medical facilities, office buildings, and hotels across Tennessee, South Carolina, and Florida.
+            </p>
+            <p>
+              We're not the biggest crew out there — but we show up on time, communicate clearly, and do excellent work. Whether it's ten doors or twelve hundred, we treat every project the same.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section className="px-6 pb-20 lg:pb-28">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="bg-card rounded-2xl p-10 md:p-14 border border-border"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+          >
+            <h3 className="font-heading text-2xl md:text-3xl mb-8">What we install</h3>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
+              {[
+                "Commercial Doors",
+                "Pre-Hung Doors",
+                "Barn Doors",
+                "Eliason Doors",
+                "Bi-Fold Doors",
+                "All Required Hardware",
+              ].map((s) => (
+                <div key={s} className="flex items-center gap-3 py-3 border-b border-border last:border-0">
+                  <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
+                  <span className="text-sm font-medium">{s}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -277,16 +274,13 @@ const Index = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={fadeUp}
+          variants={fade}
         >
-          <p className="text-primary font-heading font-bold text-sm tracking-widest uppercase mb-6">
-            What Partners Say
-          </p>
-          <blockquote className="text-xl md:text-2xl leading-relaxed font-medium italic text-surface-dark-foreground/90">
-            "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. They work efficiently, don't require constant oversight, and are always a pleasure to work with. I would definitely use Haven again."
+          <blockquote className="font-heading text-2xl md:text-3xl leading-snug italic text-surface-dark-foreground/90">
+            "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. I would definitely use Haven again."
           </blockquote>
-          <p className="mt-6 text-primary font-bold">Heather</p>
-          <p className="text-sm text-surface-dark-foreground/60">
+          <p className="mt-8 text-sm font-medium text-primary">Heather</p>
+          <p className="text-sm text-surface-dark-foreground/50">
             Project Manager, Nationwide General Contractor
           </p>
         </motion.div>
@@ -294,58 +288,61 @@ const Index = () => {
 
       {/* CONTACT */}
       <section id="contact" className="section-padding">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            className="text-center mb-12"
+            className="grid md:grid-cols-2 gap-16"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={fadeUp}
+            variants={fade}
           >
-            <p className="text-primary font-heading font-bold text-sm tracking-widest uppercase mb-3">
-              Get In Touch
-            </p>
-            <h2 className="font-heading text-3xl md:text-4xl font-extrabold">
-              Let's Work Together
-            </h2>
-          </motion.div>
-          <motion.div
-            className="grid sm:grid-cols-3 gap-8 max-w-2xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            custom={1}
-          >
-            <a
-              href="tel:6158783056"
-              className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border hover:border-primary/50 transition-colors"
-            >
-              <Phone className="w-6 h-6 text-primary" />
-              <span className="text-sm font-medium">615-878-3056</span>
-            </a>
-            <a
-              href="mailto:jake@havendoorinstallation.com"
-              className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border hover:border-primary/50 transition-colors"
-            >
-              <Mail className="w-6 h-6 text-primary" />
-              <span className="text-sm font-medium text-center">jake@havendoor<wbr/>installation.com</span>
-            </a>
-            <div className="flex flex-col items-center gap-3 p-6 rounded-xl border border-border">
-              <MapPin className="w-6 h-6 text-primary" />
-              <span className="text-sm font-medium text-center">
-                323 N Margin St
-                <br />
-                Franklin, TN 37064
-              </span>
+            <div>
+              <p className="text-primary text-sm font-medium tracking-wide uppercase mb-4">
+                Get in touch
+              </p>
+              <h2 className="font-heading text-4xl md:text-5xl leading-tight mb-6">
+                Got a project? Let's talk.
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Whether you need ten doors or a thousand, we'd love to hear about your project.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <a
+                href="tel:6158783056"
+                className="flex items-center gap-4 p-5 rounded-xl border border-border hover:border-primary/40 transition-colors group"
+              >
+                <Phone className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Phone</p>
+                  <p className="font-medium">615-878-3056</p>
+                </div>
+              </a>
+              <a
+                href="mailto:jake@havendoorinstallation.com"
+                className="flex items-center gap-4 p-5 rounded-xl border border-border hover:border-primary/40 transition-colors group"
+              >
+                <Mail className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Email</p>
+                  <p className="font-medium">jake@havendoorinstallation.com</p>
+                </div>
+              </a>
+              <div className="flex items-center gap-4 p-5 rounded-xl border border-border">
+                <MapPin className="w-5 h-5 text-primary" />
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Location</p>
+                  <p className="font-medium">323 N Margin St, Franklin, TN 37064</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="surface-dark px-6 py-10 text-center text-sm text-surface-dark-foreground/50">
-        <p>© {new Date().getFullYear()} Haven Door Installation. All rights reserved.</p>
+      <footer className="surface-dark px-6 py-8 text-center text-sm text-surface-dark-foreground/40">
+        <p>© {new Date().getFullYear()} Haven Door Installation</p>
       </footer>
     </div>
   );
