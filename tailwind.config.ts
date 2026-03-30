@@ -13,8 +13,8 @@ export default {
       },
     },
     fontFamily: {
-      heading: ['Syne', 'sans-serif'],
-      body: ['DM Sans', 'sans-serif'],
+      heading: ['Instrument Serif', 'serif'],
+      body: ['Inter', 'sans-serif'],
     },
     extend: {
       colors: {
