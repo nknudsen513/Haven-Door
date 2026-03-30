@@ -86,7 +86,7 @@ const Index = () => {
             animate="visible"
             variants={fadeUp}
           >
-            Nashville's Trusted Partner
+            Nashville &amp; Beyond
           </motion.p>
           <motion.h1
             className="font-heading text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-surface-dark-foreground max-w-3xl"
