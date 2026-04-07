@@ -100,9 +100,11 @@ const Index = () => {
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
-          <Button size="sm" variant="outline" asChild className="rounded-full">
-            <a href="#contact">Contact us</a>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button size="sm" variant="outline" asChild className="rounded-full">
+              <a href="#contact">Contact us</a>
+            </Button>
+          </motion.div>
         </div>
       </nav>
 
@@ -137,11 +139,13 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <Button size="lg" asChild className="rounded-full gap-2 px-8">
-              <a href="#contact">
-                Contact us <ArrowRight className="w-4 h-4" />
-              </a>
-            </Button>
+            <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}>
+              <Button size="lg" asChild className="rounded-full gap-2 px-8">
+                <a href="#contact">
+                  Contact us <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
         <motion.div
@@ -185,41 +189,6 @@ const Index = () => {
               We prioritize clear communication, excellence, and integrity in every job whether it is ten doors or one thousand doors.
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* DIVIDER */}
-      <div className="px-6 md:px-10">
-        <div className="border-t border-border/50" />
-      </div>
-
-      {/* WHAT WE INSTALL */}
-      <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-          >
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">
-              What we install
-            </p>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
-              Every door, done right
-            </h2>
-          </motion.div>
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-3 md:mb-4">
-            {doorTypes.slice(0, 4).map((name, i) => (
-              <Bubble key={name} name={name} delay={i * 0.04} />
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-            {doorTypes.slice(4).map((name, i) => (
-              <Bubble key={name} name={name} delay={(i + 4) * 0.04} />
-            ))}
-          </div>
         </div>
       </section>
 
@@ -273,7 +242,6 @@ const Index = () => {
               variants={fade}
             >
               <div className="relative rounded-2xl overflow-hidden cursor-pointer">
-                {/* Exterior (default) */}
                 <img
                   src={project.image}
                   alt={`${project.title} — exterior`}
@@ -282,7 +250,6 @@ const Index = () => {
                   height={640}
                   className="w-full aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
                 />
-                {/* Interior (revealed on hover) */}
                 <img
                   src={project.interiorImage}
                   alt={`${project.title} — interior`}
@@ -312,11 +279,43 @@ const Index = () => {
         </div>
 
         <div className="flex justify-center mt-12">
-          <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-surface-dark-foreground/40 text-surface-dark-foreground hover:bg-surface-dark-foreground/10 hover:border-surface-dark-foreground/60">
-            <a href="#contact">
-              See more projects <ArrowRight className="w-4 h-4" />
-            </a>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground">
+              <a href="#contact">
+                See more projects <ArrowRight className="w-4 h-4" />
+              </a>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* WHAT WE INSTALL */}
+      <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+          >
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">
+              What we install
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
+              Every door, done right
+            </h2>
+          </motion.div>
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-3 md:mb-4">
+            {doorTypes.slice(0, 4).map((name, i) => (
+              <Bubble key={name} name={name} delay={i * 0.04} />
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
+            {doorTypes.slice(4).map((name, i) => (
+              <Bubble key={name} name={name} delay={(i + 4) * 0.04} />
+            ))}
+          </div>
         </div>
       </section>
 
