@@ -367,19 +367,19 @@ const Index = () => {
           ].map((t, i) => (
             <motion.div
               key={t.name}
-              className="rounded-2xl border border-border/60 bg-card p-8 md:p-10 flex flex-col justify-between"
+              className="rounded-xl border border-border/60 bg-card p-5 md:p-6 flex flex-col justify-between"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fade}
               custom={i * 0.5}
             >
-              <blockquote className="text-muted-foreground leading-relaxed text-base md:text-lg italic mb-8">
+              <blockquote className="text-muted-foreground leading-relaxed text-sm md:text-base italic mb-4">
                 "{t.quote}"
               </blockquote>
-              <div className="border-t border-border/50 pt-5">
-                <p className="font-heading text-lg text-foreground">{t.name}</p>
-                <p className="text-sm text-muted-foreground">{t.company}</p>
+              <div className="border-t border-border/50 pt-3">
+                <p className="font-heading text-base text-foreground">{t.name}</p>
+                <p className="text-xs text-muted-foreground">{t.company}</p>
               </div>
             </motion.div>
           ))}
