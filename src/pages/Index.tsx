@@ -8,7 +8,7 @@ import projectMedical from "@/assets/project-medical.jpg";
 import projectHotelInterior from "@/assets/project-hotel-interior.jpg";
 import projectSchoolInterior from "@/assets/project-school-interior.jpg";
 import projectMedicalInterior from "@/assets/project-medical-interior.jpg";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
