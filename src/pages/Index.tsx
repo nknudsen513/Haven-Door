@@ -191,7 +191,7 @@ const Index = () => {
             Every door, done right
           </h2>
         </motion.div>
-        <div className="flex flex-wrap justify-center gap-4 md:gap-5 max-w-4xl mx-auto">
+        <div className="flex flex-wrap gap-4 md:gap-5 max-w-5xl">
           {doorTypes.map((door, i) => (
             <motion.div
               key={door.name}
