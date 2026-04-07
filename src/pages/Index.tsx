@@ -37,13 +37,13 @@ const projects = [
   },
 ];
 
-const doorTypes = [
-  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces" },
-  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs" },
-  { name: "Barn Doors", desc: "Sliding hardware for modern interiors" },
-  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas" },
-  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems" },
-  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works" },
+const doorTypes: { name: string; desc: string; icon: ReactNode; number: string }[] = [
+  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-8 h-8" />, number: "01" },
+  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-8 h-8" />, number: "02" },
+  { name: "Barn Doors", desc: "Sliding hardware for modern interiors", icon: <SlidersHorizontal className="w-8 h-8" />, number: "03" },
+  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <RotateCcw className="w-8 h-8" />, number: "04" },
+  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-8 h-8" />, number: "05" },
+  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-8 h-8" />, number: "06" },
 ];
 
 const Index = () => {
