@@ -25,18 +25,21 @@ const projects = [
     location: "Nashville, TN",
     scope: "All doors & hardware — last-minute timeline save",
     image: projectSchool,
+    interiorImage: projectSchoolInterior,
   },
   {
     title: "Avid / Holiday Inn Dual Hotel",
     location: "Tennessee",
     scope: "350+ doors, frames & hardware across 168 rooms",
     image: projectHotel,
+    interiorImage: projectHotelInterior,
   },
   {
     title: "Meharry Medical Live Learn Center",
     location: "Nashville, TN",
     scope: "1,200+ doors installed — pre-hung, solid core & hollow metal",
     image: projectMedical,
+    interiorImage: projectMedicalInterior,
   },
 ];
 
