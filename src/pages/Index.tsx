@@ -311,18 +311,6 @@ const Index = () => {
           </Button>
         </div>
       </section>
-                className={`w-full text-left border-b border-border py-6 px-4 flex items-center gap-6 transition-all duration-300 group ${
-                  activeDoor === i ? "bg-primary/5" : "hover:bg-muted/50"
-                }`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fade}
-                custom={i * 0.3}
-              >
-                <span className={`text-xs font-mono tracking-wider transition-colors ${
-                  activeDoor === i ? "text-primary" : "text-muted-foreground/40"
-                }`}>
                   {door.number}
                 </span>
                 <div className="flex-1">
