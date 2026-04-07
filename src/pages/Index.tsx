@@ -333,7 +333,7 @@ const Index = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
-          className="mb-14"
+          className="mb-8"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             HEAR FROM OUR CLIENTS
