@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown, DoorOpen, Warehouse, SlidersHorizontal, RotateCcw, FoldHorizontal, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectSchool from "@/assets/project-school.jpg";
 import projectMedical from "@/assets/project-medical.jpg";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -37,19 +37,20 @@ const projects = [
   },
 ];
 
-const doorTypes = [
-  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces" },
-  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs" },
-  { name: "Barn Doors", desc: "Sliding hardware for modern interiors" },
-  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas" },
-  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems" },
-  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works" },
+const doorTypes: { name: string; desc: string; icon: ReactNode; number: string }[] = [
+  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-8 h-8" />, number: "01" },
+  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-8 h-8" />, number: "02" },
+  { name: "Barn Doors", desc: "Sliding hardware for modern interiors", icon: <SlidersHorizontal className="w-8 h-8" />, number: "03" },
+  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <RotateCcw className="w-8 h-8" />, number: "04" },
+  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-8 h-8" />, number: "05" },
+  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-8 h-8" />, number: "06" },
 ];
 
 const Index = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeDoor, setActiveDoor] = useState(0);
 
   const checkScroll = () => {
     const el = carouselRef.current;
@@ -78,7 +79,7 @@ const Index = () => {
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
           <Button size="sm" variant="outline" asChild className="rounded-full">
-            <a href="#contact">Get a quote</a>
+            <a href="#contact">Contact us</a>
           </Button>
         </div>
       </nav>
@@ -116,7 +117,7 @@ const Index = () => {
           >
             <Button size="lg" asChild className="rounded-full gap-2 px-8">
               <a href="#contact">
-                Get a quote <ArrowRight className="w-4 h-4" />
+                Contact us <ArrowRight className="w-4 h-4" />
               </a>
             </Button>
           </motion.div>
@@ -144,7 +145,7 @@ const Index = () => {
               About us
             </p>
             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
-              Straightforward people doing honest work
+              Committed to excellence
             </h2>
           </motion.div>
           <motion.div
@@ -156,16 +157,16 @@ const Index = () => {
             custom={1}
           >
             <p>
-              Haven Door Installation has been serving Nashville and beyond since 2018. We work with general contractors on schools, medical facilities, office buildings, and hotels across Tennessee, South Carolina, and Florida.
+              Haven Door Installation is a leading and reputable subcontracting company serving the Nashville area and beyond. Having launched into the industry in 2018, Haven Door Installation has completed schools, medical facilities, office buildings, hotels, and more with many different General Contractors from Tennessee, to South Carolina, to Florida.
             </p>
             <p>
-              We're not the biggest crew out there — but we show up on time, communicate clearly, and do excellent work. Whether it's ten doors or twelve hundred, we treat every project the same.
+              We prioritize clear communication, excellence, and integrity in every job whether it is ten doors or one thousand doors.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — interactive cards */}
+      {/* WHAT WE INSTALL — accordion-style interactive list */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
         <motion.div
           initial="hidden"
@@ -176,34 +177,82 @@ const Index = () => {
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             What we install
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl mb-12">
+          <h2 className="font-heading text-4xl md:text-5xl mb-16">
             Every door, done right
           </h2>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {doorTypes.map((door, i) => (
-            <motion.div
-              key={door.name}
-              className="group relative p-8 rounded-2xl border border-border bg-card hover:bg-primary hover:border-primary transition-colors duration-300 cursor-default"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fade}
-              custom={i * 0.5}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-heading text-xl md:text-2xl group-hover:text-primary-foreground transition-colors">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start">
+          {/* Left: interactive list */}
+          <div className="space-y-0 border-t border-border">
+            {doorTypes.map((door, i) => (
+              <motion.button
+                key={door.name}
+                onClick={() => setActiveDoor(i)}
+                className={`w-full text-left border-b border-border py-6 px-4 flex items-center gap-6 transition-all duration-300 group ${
+                  activeDoor === i ? "bg-primary/5" : "hover:bg-muted/50"
+                }`}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fade}
+                custom={i * 0.3}
+              >
+                <span className={`text-xs font-mono tracking-wider transition-colors ${
+                  activeDoor === i ? "text-primary" : "text-muted-foreground/40"
+                }`}>
+                  {door.number}
+                </span>
+                <div className="flex-1">
+                  <h3 className={`font-heading text-xl md:text-2xl transition-colors ${
+                    activeDoor === i ? "text-primary" : "text-foreground"
+                  }`}>
                     {door.name}
                   </h3>
-                  <p className="mt-2 text-sm text-muted-foreground group-hover:text-primary-foreground/70 transition-colors">
-                    {door.desc}
-                  </p>
+                  <AnimatePresence>
+                    {activeDoor === i && (
+                      <motion.p
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-sm text-muted-foreground mt-2 overflow-hidden"
+                      >
+                        {door.desc}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <ArrowRight className="w-5 h-5 mt-1 text-muted-foreground/30 group-hover:text-primary-foreground/60 shrink-0 -rotate-45 group-hover:rotate-0 transition-all duration-300" />
-              </div>
-            </motion.div>
-          ))}
+                <div className={`transition-colors ${
+                  activeDoor === i ? "text-primary" : "text-muted-foreground/20"
+                }`}>
+                  {door.icon}
+                </div>
+              </motion.button>
+            ))}
+          </div>
+          {/* Right: large active icon display */}
+          <div className="hidden lg:flex items-center justify-center min-h-[400px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeDoor}
+                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 0.8, rotate: 10 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col items-center gap-8 text-center"
+              >
+                <div className="w-32 h-32 rounded-3xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                  <div className="scale-[2.5]">
+                    {doorTypes[activeDoor].icon}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-heading text-3xl text-foreground">{doorTypes[activeDoor].name}</p>
+                  <p className="text-muted-foreground mt-2 max-w-xs">{doorTypes[activeDoor].desc}</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 
