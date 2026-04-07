@@ -117,7 +117,7 @@ const Index = () => {
           >
             <Button size="lg" asChild className="rounded-full gap-2 px-8">
               <a href="#contact">
-                Get a quote <ArrowRight className="w-4 h-4" />
+                Contact us <ArrowRight className="w-4 h-4" />
               </a>
             </Button>
           </motion.div>
