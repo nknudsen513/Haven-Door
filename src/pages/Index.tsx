@@ -312,7 +312,7 @@ const Index = () => {
         </div>
 
         <div className="flex justify-center mt-12">
-          <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-surface-dark-foreground/20 text-surface-dark-foreground hover:border-primary hover:text-primary">
+          <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-surface-dark-foreground/40 text-surface-dark-foreground hover:bg-surface-dark-foreground/10 hover:border-surface-dark-foreground/60">
             <a href="#contact">
               See more projects <ArrowRight className="w-4 h-4" />
             </a>
