@@ -171,60 +171,56 @@ const Index = () => {
 
       {/* WHAT WE INSTALL — bubbles */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fade}
+            className="text-center mb-14"
           >
             <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
               What we install
             </p>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
-              Every door,
-              <br />
-              done right
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
+              Every door, done right
             </h2>
-            <p className="mt-6 text-muted-foreground text-lg leading-relaxed max-w-md">
+            <p className="mt-4 text-muted-foreground text-lg max-w-lg mx-auto">
               From schools to hotels, we supply and install every type of commercial door and the hardware to match.
             </p>
           </motion.div>
-          <div className="relative min-h-[340px] md:min-h-[380px]">
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
             {doorTypes.map((name, i) => {
-              const placements = [
-                { top: "0%", left: "8%", scale: 1.08 },
-                { top: "0%", left: "42%", scale: 0.92 },
-                { top: "2%", left: "72%", scale: 0.88 },
-                { top: "14%", left: "0%", scale: 0.95 },
-                { top: "13%", left: "28%", scale: 1.14 },
-                { top: "15%", left: "62%", scale: 0.9 },
-                { top: "27%", left: "6%", scale: 1.0 },
-                { top: "28%", left: "38%", scale: 0.88 },
-                { top: "26%", left: "68%", scale: 1.02 },
-                { top: "40%", left: "14%", scale: 0.93 },
-                { top: "41%", left: "46%", scale: 1.1 },
-                { top: "53%", left: "0%", scale: 0.86 },
-                { top: "54%", left: "28%", scale: 0.95 },
-                { top: "52%", left: "60%", scale: 1.05 },
+              const sizeClasses = [
+                "px-7 py-3.5 text-base",
+                "px-8 py-4 text-lg",
+                "px-6 py-3 text-sm",
+                "px-9 py-4.5 text-lg",
+                "px-6 py-3 text-sm",
+                "px-7 py-3.5 text-base",
+                "px-8 py-4 text-lg",
+                "px-6 py-3 text-sm",
+                "px-7 py-3.5 text-base",
+                "px-9 py-4.5 text-lg",
+                "px-6 py-3 text-sm",
+                "px-8 py-4 text-lg",
+                "px-7 py-3.5 text-base",
+                "px-6 py-3 text-sm",
               ];
-              const p = placements[i];
               return (
                 <motion.div
                   key={name}
-                  className="absolute group cursor-default"
-                  style={{ top: p.top, left: p.left }}
-                  initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  className="group cursor-default"
+                  initial={{ opacity: 0, scale: 0.7 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ scale: 1.15, y: -4, transition: { duration: 0.25 } }}
+                  transition={{ delay: i * 0.04, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ scale: 1.12, y: -3, transition: { duration: 0.2 } }}
                 >
                   <div
-                    className="px-5 py-3 md:px-7 md:py-3.5 rounded-full border border-border/40 bg-card/60 backdrop-blur-md group-hover:bg-primary group-hover:border-primary transition-all duration-300 shadow-[0_2px_16px_-4px_hsl(var(--primary)/0.08)] group-hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.4)]"
-                    style={{ transform: `scale(${p.scale})` }}
+                    className={`${sizeClasses[i]} rounded-full border border-border/50 bg-card/70 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-all duration-300 shadow-sm group-hover:shadow-[0_10px_36px_-6px_hsl(var(--primary)/0.35)]`}
                   >
-                    <p className="font-heading text-sm md:text-base text-foreground/80 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                    <p className="font-heading text-foreground/80 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
                       {name}
                     </p>
                   </div>
