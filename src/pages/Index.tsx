@@ -56,7 +56,7 @@ const Index = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [activeDoor, setActiveDoor] = useState(0);
+  const [activeDoor, _setActiveDoor] = useState(0);
 
   const checkScroll = () => {
     const el = carouselRef.current;
