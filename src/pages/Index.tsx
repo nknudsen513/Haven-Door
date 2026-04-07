@@ -190,23 +190,23 @@ const Index = () => {
               From schools to hotels, we supply and install every type of commercial door and the hardware to match.
             </p>
           </motion.div>
-          <div className="relative min-h-[420px] md:min-h-[480px]">
+          <div className="relative min-h-[340px] md:min-h-[380px]">
             {doorTypes.map((name, i) => {
               const placements = [
-                { top: "0%", left: "12%", scale: 1.1 },
-                { top: "1%", left: "52%", scale: 0.92 },
-                { top: "12%", left: "78%", scale: 0.85 },
-                { top: "18%", left: "0%", scale: 0.95 },
-                { top: "20%", left: "34%", scale: 1.18 },
-                { top: "32%", left: "65%", scale: 0.9 },
-                { top: "38%", left: "5%", scale: 1.05 },
-                { top: "42%", left: "40%", scale: 0.88 },
-                { top: "50%", left: "72%", scale: 1.0 },
-                { top: "55%", left: "15%", scale: 0.93 },
-                { top: "60%", left: "48%", scale: 1.12 },
-                { top: "68%", left: "0%", scale: 0.86 },
-                { top: "72%", left: "30%", scale: 0.95 },
-                { top: "70%", left: "68%", scale: 1.08 },
+                { top: "0%", left: "8%", scale: 1.08 },
+                { top: "0%", left: "42%", scale: 0.92 },
+                { top: "2%", left: "72%", scale: 0.88 },
+                { top: "14%", left: "0%", scale: 0.95 },
+                { top: "13%", left: "28%", scale: 1.14 },
+                { top: "15%", left: "62%", scale: 0.9 },
+                { top: "27%", left: "6%", scale: 1.0 },
+                { top: "28%", left: "38%", scale: 0.88 },
+                { top: "26%", left: "68%", scale: 1.02 },
+                { top: "40%", left: "14%", scale: 0.93 },
+                { top: "41%", left: "46%", scale: 1.1 },
+                { top: "53%", left: "0%", scale: 0.86 },
+                { top: "54%", left: "28%", scale: 0.95 },
+                { top: "52%", left: "60%", scale: 1.05 },
               ];
               const p = placements[i];
               return (
