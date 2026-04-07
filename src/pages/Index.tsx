@@ -69,8 +69,32 @@ const Bubble = ({ name, delay }: { name: string; delay: number }) => (
   </motion.div>
 );
 
+const testimonials = [
+  {
+    quote: "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. They work efficiently, don't require constant oversight, and are always a pleasure to work with. I would definitely use Haven again for both small and larger projects.",
+    name: "Heather",
+    company: "Project Manager, Nationwide General Contractor",
+  },
+  {
+    quote: "I have worked with Haven for years now. I have realized it is so much more beneficial to have them focus on doors and hardware which frees up more time for our field staff to govern the other scopes and trades that are on site. Their responsiveness and willingness to help has been incredible. They go above and beyond to help throughout the course of a project, whether that be picking up additional hardware, helping to move doors in a pinch, etc. They are fair on their estimates and easy to communicate with. I do not have anything bad to say about Haven and I look forward to working with them for the many years to come.",
+    name: "Hamilton",
+    company: "Stacker Builders",
+  },
+  {
+    quote: "We have used Haven Door Installation on several of our projects. They do a great job working with our superintendents going out of their way to help them when needed. They are always responsive and work hard to provide excellent customer service.",
+    name: "Ross",
+    company: "Moffitt Builders",
+  },
+  {
+    quote: "I have worked with Jake and the team at Haven Door Installation on a number of projects, big and small, over the last 3+ years and have always found their level of service and quality of their work to be excellent. I am glad to endorse and recommend them for all your door installation needs.",
+    name: "Roy",
+    company: "Baron Construction",
+  },
+];
+
 const Index = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -327,61 +351,62 @@ const Index = () => {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="px-6 md:px-10 pt-6 pb-24 lg:pt-0 lg:pb-[12px]">
+      <section className="px-6 md:px-10 pt-6 pb-24 lg:pt-0 lg:pb-[12px] overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
-          className="mb-8"
+          className="flex items-end justify-between mb-8"
         >
-          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            HEAR FROM OUR CLIENTS
-          </p>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
-            What they say
-          </h2>
-        </motion.div>
-        <div className="grid md:grid-cols-2 gap-4">
-          {[
-            {
-              quote: "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. They work efficiently, don't require constant oversight, and are always a pleasure to work with. I would definitely use Haven again for both small and larger projects.",
-              name: "Heather",
-              company: "Project Manager, Nationwide General Contractor",
-            },
-            {
-              quote: "I have worked with Haven for years now. I have realized it is so much more beneficial to have them focus on doors and hardware which frees up more time for our field staff to govern the other scopes and trades that are on site. Their responsiveness and willingness to help has been incredible. They go above and beyond to help throughout the course of a project, whether that be picking up additional hardware, helping to move doors in a pinch, etc. They are fair on their estimates and easy to communicate with. I do not have anything bad to say about Haven and I look forward to working with them for the many years to come.",
-              name: "Hamilton",
-              company: "Stacker Builders",
-            },
-            {
-              quote: "We have used Haven Door Installation on several of our projects. They do a great job working with our superintendents going out of their way to help them when needed. They are always responsive and work hard to provide excellent customer service.",
-              name: "Ross",
-              company: "Moffitt Builders",
-            },
-            {
-              quote: "I have worked with Jake and the team at Haven Door Installation on a number of projects, big and small, over the last 3+ years and have always found their level of service and quality of their work to be excellent. I am glad to endorse and recommend them for all your door installation needs.",
-              name: "Roy",
-              company: "Baron Construction",
-            },
-          ].map((t, i) => (
-            <motion.div
-              key={t.name}
-              className="rounded-xl border border-border/60 bg-card p-5 md:p-6 flex flex-col justify-between"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fade}
-              custom={i * 0.5}
+          <div>
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
+              HEAR FROM OUR CLIENTS
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
+              What they say
+            </h2>
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setTestimonialIndex((prev) => Math.max(prev - 1, 0))}
+              disabled={testimonialIndex === 0}
+              className="p-2 rounded-full border border-border/60 text-muted-foreground hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
-              <blockquote className="text-muted-foreground leading-relaxed text-sm md:text-base italic mb-4">
-                "{t.quote}"
-              </blockquote>
-              <div className="border-t border-border/50 pt-3">
-                <p className="font-heading text-base text-foreground">{t.name}</p>
-                <p className="text-xs text-muted-foreground">{t.company}</p>
-              </div>
-            </motion.div>
+              <ArrowLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setTestimonialIndex((prev) => Math.min(prev + 1, testimonials.length - 1))}
+              disabled={testimonialIndex === testimonials.length - 1}
+              className="p-2 rounded-full border border-border/60 text-muted-foreground hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </motion.div>
+        <motion.div
+          key={testimonialIndex}
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -40 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-3xl"
+        >
+          <blockquote className="text-muted-foreground leading-relaxed text-lg md:text-xl italic mb-6">
+            "{testimonials[testimonialIndex].quote}"
+          </blockquote>
+          <div>
+            <p className="font-heading text-lg text-foreground">{testimonials[testimonialIndex].name}</p>
+            <p className="text-sm text-muted-foreground">{testimonials[testimonialIndex].company}</p>
+          </div>
+        </motion.div>
+        <div className="flex gap-1.5 mt-6">
+          {testimonials.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setTestimonialIndex(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === testimonialIndex ? "w-8 bg-primary" : "w-3 bg-border"}`}
+            />
           ))}
         </div>
       </section>
