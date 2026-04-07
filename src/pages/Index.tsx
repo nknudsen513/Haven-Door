@@ -147,9 +147,9 @@ const Index = () => {
             transition={{ delay: 0.4, duration: 0.6 }}
           >
             <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}>
-              <Button size="lg" asChild className="rounded-full gap-2 px-8">
+              <Button size="lg" asChild className="rounded-full gap-2 px-8 group/btn">
                 <a href="#contact">
-                  Contact us <ArrowRight className="w-4 h-4" />
+                  Contact us <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                 </a>
               </Button>
             </motion.div>
