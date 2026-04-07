@@ -171,39 +171,45 @@ const Index = () => {
 
       {/* WHAT WE INSTALL — scattered bubbles */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32 overflow-hidden">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fade}
-          className="text-center mb-20"
-        >
-          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            What we install
-          </p>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
-            Every door, done right
-          </h2>
-        </motion.div>
+        {/* Desktop: scattered with header in center */}
+        <div className="hidden md:block relative w-full max-w-5xl mx-auto" style={{ height: 520 }}>
+          {/* Center header */}
+          <motion.div
+            className="absolute z-10 text-center"
+            style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+          >
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">
+              What we install
+            </p>
+            <h2 className="font-heading text-5xl lg:text-6xl">
+              Every door,
+              <br />
+              done right
+            </h2>
+          </motion.div>
 
-        {/* Desktop: scattered absolute layout */}
-        <div className="hidden md:block relative w-full max-w-5xl mx-auto" style={{ height: 420 }}>
+          {/* Bubbles scattered around the header */}
           {doorTypes.map((name, i) => {
+            // Positions arranged in a ring/cloud around center, avoiding the middle
             const spots: { x: number; y: number; s: number; r: number }[] = [
-              { x: 2, y: 0, s: 1.15, r: -2 },
-              { x: 30, y: 8, s: 1.0, r: 1 },
-              { x: 58, y: 0, s: 0.9, r: -1 },
-              { x: 82, y: 12, s: 1.1, r: 2 },
-              { x: 10, y: 22, s: 0.95, r: 1.5 },
-              { x: 42, y: 28, s: 1.2, r: -1.5 },
-              { x: 72, y: 24, s: 0.88, r: 0.5 },
-              { x: 0, y: 44, s: 1.05, r: -1 },
-              { x: 24, y: 48, s: 0.92, r: 2 },
-              { x: 52, y: 46, s: 1.1, r: -2 },
-              { x: 78, y: 42, s: 0.95, r: 1 },
-              { x: 14, y: 66, s: 1.08, r: -0.5 },
-              { x: 40, y: 70, s: 0.9, r: 1.5 },
-              { x: 66, y: 64, s: 1.12, r: -1 },
+              { x: 0, y: 2, s: 1.1, r: -2 },
+              { x: 22, y: 0, s: 0.95, r: 1 },
+              { x: 55, y: 2, s: 1.0, r: -1 },
+              { x: 80, y: 0, s: 0.9, r: 1.5 },
+              { x: 0, y: 18, s: 0.92, r: 1 },
+              { x: 72, y: 16, s: 1.15, r: -1.5 },
+              { x: 88, y: 18, s: 0.88, r: 0.5 },
+              { x: 0, y: 72, s: 1.05, r: -1 },
+              { x: 18, y: 76, s: 0.9, r: 2 },
+              { x: 74, y: 70, s: 1.08, r: -2 },
+              { x: 88, y: 74, s: 0.92, r: 1 },
+              { x: 4, y: 88, s: 0.95, r: -0.5 },
+              { x: 30, y: 92, s: 1.12, r: 1.5 },
+              { x: 62, y: 90, s: 0.9, r: -1 },
             ];
             const spot = spots[i];
             return (
@@ -212,7 +218,7 @@ const Index = () => {
                 className="absolute group cursor-default"
                 style={{
                   left: `${spot.x}%`,
-                  top: spot.y * 4.2,
+                  top: `${spot.y}%`,
                   rotate: spot.r,
                   zIndex: i % 3 === 0 ? 2 : 1,
                 }}
@@ -232,7 +238,7 @@ const Index = () => {
                   transition: { type: "spring", stiffness: 300, damping: 15 },
                 }}
               >
-                <div className="px-6 py-3.5 md:px-8 md:py-4 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-colors duration-300 shadow-[0_4px_20px_-6px_hsl(var(--foreground)/0.08)] group-hover:shadow-[0_14px_40px_-8px_hsl(var(--primary)/0.45)]">
+                <div className="px-7 py-3.5 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-colors duration-300 shadow-[0_4px_20px_-6px_hsl(var(--foreground)/0.08)] group-hover:shadow-[0_14px_40px_-8px_hsl(var(--primary)/0.45)]">
                   <p className="font-heading text-sm md:text-base text-foreground/70 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
                     {name}
                   </p>
