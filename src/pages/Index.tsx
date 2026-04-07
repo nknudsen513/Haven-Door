@@ -90,19 +90,25 @@ const Index = () => {
     setTimeout(checkScroll, 400);
   };
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/50">
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/70 backdrop-blur-xl border-b border-border/50" : "bg-transparent border-b border-transparent"}`}>
         <div className="flex items-center justify-between px-6 md:px-10 py-4">
-          <span className="font-heading text-2xl tracking-tight">Haven Door</span>
+          <span className={`font-heading text-2xl tracking-tight transition-colors duration-300 ${scrolled ? "text-foreground" : "text-primary-foreground"}`}>Haven Door</span>
           <div className="flex-1" />
-          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground mr-6">
-            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
-            <a href="#about" className="hover:text-foreground transition-colors">About</a>
+          <div className={`hidden md:flex items-center gap-8 text-sm mr-6 transition-colors duration-300 ${scrolled ? "text-muted-foreground" : "text-primary-foreground/70"}`}>
+            <a href="#projects" className={`transition-colors ${scrolled ? "hover:text-foreground" : "hover:text-primary-foreground"}`}>Projects</a>
+            <a href="#about" className={`transition-colors ${scrolled ? "hover:text-foreground" : "hover:text-primary-foreground"}`}>About</a>
           </div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button size="sm" variant="outline" asChild className="rounded-full">
+            <Button size="sm" variant="outline" asChild className={`rounded-full transition-colors duration-300 ${scrolled ? "" : "border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"}`}>
               <a href="#contact">Contact us</a>
             </Button>
           </motion.div>
