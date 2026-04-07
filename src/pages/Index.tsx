@@ -177,9 +177,8 @@ const Index = () => {
 
       {/* WHAT WE INSTALL — bubbles */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <motion.div
-            className="lg:col-span-2"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -188,48 +187,46 @@ const Index = () => {
             <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
               What we install
             </p>
-            <h2 className="font-heading text-4xl md:text-5xl">
-              Every door, done right
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
+              Every door,
+              <br />
+              done right
             </h2>
+            <p className="mt-6 text-muted-foreground text-lg leading-relaxed max-w-md">
+              From schools to hotels, we supply and install every type of commercial door and the hardware to match.
+            </p>
           </motion.div>
-          <div className="lg:col-span-3 flex flex-wrap justify-center gap-3 md:gap-4">
+          <div className="relative min-h-[320px] md:min-h-[380px]">
             {doorTypes.map((door, i) => {
-              const sizes = [
-                "px-7 py-4 text-base",
-                "px-8 py-5 text-lg",
-                "px-6 py-3 text-sm",
-                "px-9 py-5 text-lg",
-                "px-7 py-4 text-base",
-                "px-6 py-3 text-sm",
-                "px-8 py-4 text-base",
-                "px-7 py-5 text-lg",
-                "px-6 py-3 text-sm",
-                "px-8 py-4 text-base",
+              // Hand-placed positions for an organic cloud layout
+              const placements = [
+                { top: "0%", left: "10%", scale: 1.1 },
+                { top: "2%", left: "55%", scale: 0.95 },
+                { top: "22%", left: "0%", scale: 0.9 },
+                { top: "20%", left: "38%", scale: 1.15 },
+                { top: "18%", left: "75%", scale: 0.85 },
+                { top: "42%", left: "8%", scale: 1.05 },
+                { top: "44%", left: "48%", scale: 0.9 },
+                { top: "62%", left: "2%", scale: 0.95 },
+                { top: "60%", left: "35%", scale: 1.1 },
+                { top: "64%", left: "70%", scale: 0.88 },
               ];
-              const offsets = [
-                "translate-y-0",
-                "-translate-y-2",
-                "translate-y-3",
-                "-translate-y-1",
-                "translate-y-2",
-                "-translate-y-3",
-                "translate-y-1",
-                "-translate-y-2",
-                "translate-y-4",
-                "-translate-y-1",
-              ];
+              const p = placements[i % placements.length];
               return (
                 <motion.div
                   key={door.name}
-                  className={`group ${offsets[i % offsets.length]}`}
-                  initial="hidden"
-                  whileInView="visible"
+                  className="absolute group"
+                  style={{ top: p.top, left: p.left }}
+                  initial={{ opacity: 0, scale: 0.6 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  variants={fade}
-                  custom={i * 0.3}
+                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className={`${sizes[i % sizes.length]} rounded-full border border-border bg-card hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg`}>
-                    <p className="font-heading group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                  <div
+                    className="px-6 py-3.5 md:px-7 md:py-4 rounded-full border border-border/60 bg-card/80 backdrop-blur-sm hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 cursor-default shadow-[0_2px_20px_-4px_hsl(var(--primary)/0.1)] hover:shadow-[0_8px_30px_-4px_hsl(var(--primary)/0.3)]"
+                    style={{ transform: `scale(${p.scale})` }}
+                  >
+                    <p className="font-heading text-sm md:text-base group-hover:text-primary-foreground transition-colors whitespace-nowrap">
                       {door.name}
                     </p>
                   </div>
