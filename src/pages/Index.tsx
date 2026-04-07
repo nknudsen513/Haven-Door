@@ -43,20 +43,19 @@ const projects = [
   },
 ];
 
-const doorTypes: { name: string; desc: string; icon: ReactNode; number: string }[] = [
-  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-8 h-8" />, number: "01" },
-  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-8 h-8" />, number: "02" },
-  { name: "Barn Doors", desc: "Sliding hardware for modern interiors", icon: <SlidersHorizontal className="w-8 h-8" />, number: "03" },
-  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <RotateCcw className="w-8 h-8" />, number: "04" },
-  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-8 h-8" />, number: "05" },
-  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-8 h-8" />, number: "06" },
+const doorTypes: { name: string; desc: string; icon: ReactNode }[] = [
+  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-6 h-6" /> },
+  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-6 h-6" /> },
+  { name: "Barn Doors", desc: "Sliding hardware for modern interiors", icon: <SlidersHorizontal className="w-6 h-6" /> },
+  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <RotateCcw className="w-6 h-6" /> },
+  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-6 h-6" /> },
+  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-6 h-6" /> },
 ];
 
 const Index = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [activeDoor, _setActiveDoor] = useState(0);
 
   const checkScroll = () => {
     const el = carouselRef.current;
@@ -90,7 +89,7 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* HERO — centered logo on full-bleed image */}
+      {/* HERO */}
       <section className="relative h-screen min-h-[600px] flex flex-col items-center justify-center">
         <div className="absolute inset-0">
           <img
@@ -172,7 +171,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — floating bubbles */}
+      {/* WHAT WE INSTALL — bubbles */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
         <motion.div
           initial="hidden"
@@ -192,7 +191,7 @@ const Index = () => {
           {doorTypes.map((door, i) => (
             <motion.div
               key={door.name}
-              className="group relative"
+              className="group"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -267,6 +266,7 @@ const Index = () => {
               variants={fade}
             >
               <div className="relative rounded-2xl overflow-hidden cursor-pointer">
+                {/* Exterior (default) */}
                 <img
                   src={project.image}
                   alt={`${project.title} — exterior`}
@@ -275,6 +275,7 @@ const Index = () => {
                   height={640}
                   className="w-full aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
                 />
+                {/* Interior (revealed on hover) */}
                 <img
                   src={project.interiorImage}
                   alt={`${project.title} — interior`}
@@ -309,137 +310,6 @@ const Index = () => {
               See more projects <ArrowRight className="w-4 h-4" />
             </a>
           </Button>
-        </div>
-      </section>
-                  {door.number}
-                </span>
-                <div className="flex-1">
-                  <h3 className={`font-heading text-xl md:text-2xl transition-colors ${
-                    activeDoor === i ? "text-primary" : "text-foreground"
-                  }`}>
-                    {door.name}
-                  </h3>
-                  <AnimatePresence>
-                    {activeDoor === i && (
-                      <motion.p
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="text-sm text-muted-foreground mt-2 overflow-hidden"
-                      >
-                        {door.desc}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-                <div className={`transition-colors ${
-                  activeDoor === i ? "text-primary" : "text-muted-foreground/20"
-                }`}>
-                  {door.icon}
-                </div>
-              </motion.button>
-            ))}
-          </div>
-          {/* Right: large active icon display */}
-          <div className="hidden lg:flex items-center justify-center min-h-[400px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeDoor}
-                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, scale: 0.8, rotate: 10 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col items-center gap-8 text-center"
-              >
-                <div className="w-32 h-32 rounded-3xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                  <div className="scale-[2.5]">
-                    {doorTypes[activeDoor].icon}
-                  </div>
-                </div>
-                <div>
-                  <p className="font-heading text-3xl text-foreground">{doorTypes[activeDoor].name}</p>
-                  <p className="text-muted-foreground mt-2 max-w-xs">{doorTypes[activeDoor].desc}</p>
-                </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS CAROUSEL */}
-      <section id="work" className="surface-dark py-24 lg:py-32">
-        <div className="px-6 md:px-10 flex items-end justify-between mb-12">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-          >
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-              Selected work
-            </p>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-surface-dark-foreground">
-              Projects we're proud of
-            </h2>
-          </motion.div>
-          <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={() => scroll("left")}
-              disabled={!canScrollLeft}
-              className="p-3 rounded-full border border-surface-dark-foreground/20 text-surface-dark-foreground/60 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              disabled={!canScrollRight}
-              className="p-3 rounded-full border border-surface-dark-foreground/20 text-surface-dark-foreground/60 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-            >
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        <div
-          ref={carouselRef}
-          onScroll={checkScroll}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-10 pb-4 scrollbar-hide"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {projects.map((project) => (
-            <motion.div
-              key={project.title}
-              className="snap-start shrink-0 w-[85%] md:w-[calc(50%-12px)] group"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fade}
-            >
-              <div className="relative rounded-2xl overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  width={960}
-                  height={640}
-                  className="w-full aspect-[3/2] object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <h3 className="font-heading text-2xl md:text-3xl text-primary-foreground mb-1">
-                    {project.title}
-                  </h3>
-                  <p className="text-primary-foreground/50 text-xs uppercase tracking-widest mb-1">
-                    {project.location}
-                  </p>
-                  <p className="text-primary-foreground/70 text-sm md:text-base">
-                    {project.scope}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
         </div>
       </section>
 
