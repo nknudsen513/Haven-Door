@@ -167,7 +167,7 @@ const Index = () => {
               About us
             </p>
             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
-              Committed to excellence
+              Committed to <span className="text-primary italic">excellence.</span>
             </h2>
           </motion.div>
           <motion.div
@@ -188,10 +188,14 @@ const Index = () => {
         </div>
       </section>
 
+      {/* DIVIDER */}
+      <div className="px-6 md:px-10">
+        <div className="border-t border-border/50" />
+      </div>
+
       {/* WHAT WE INSTALL */}
       <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          {/* Heading */}
           <motion.div
             className="text-center mb-12"
             initial="hidden"
@@ -206,7 +210,6 @@ const Index = () => {
               Every door, done right
             </h2>
           </motion.div>
-          {/* Bubbles */}
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-3 md:mb-4">
             {doorTypes.slice(0, 4).map((name, i) => (
               <Bubble key={name} name={name} delay={i * 0.04} />
@@ -309,7 +312,7 @@ const Index = () => {
         </div>
 
         <div className="flex justify-center mt-12">
-          <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-surface-dark-foreground/20 text-surface-dark-foreground hover:border-primary hover:text-primary">
+          <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-surface-dark-foreground/40 text-surface-dark-foreground hover:bg-surface-dark-foreground/10 hover:border-surface-dark-foreground/60">
             <a href="#contact">
               See more projects <ArrowRight className="w-4 h-4" />
             </a>
@@ -395,7 +398,7 @@ const Index = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-background px-6 md:px-10 py-8 text-center text-sm text-muted-foreground">
+      <footer className="surface-dark px-6 md:px-10 py-6 text-center text-sm text-surface-dark-foreground/40 border-t border-surface-dark-foreground/10">
         <p>© {new Date().getFullYear()} Haven Door Installation</p>
       </footer>
     </div>
