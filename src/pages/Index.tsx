@@ -290,7 +290,7 @@ const Index = () => {
       </section>
 
       {/* WHAT WE INSTALL */}
-      <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
+      <section className="px-6 md:px-10 py-24 overflow-hidden lg:py-[12px]">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -320,7 +320,7 @@ const Index = () => {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="px-6 md:px-10 py-24 lg:py-32">
+      <section className="px-6 md:px-10 py-24 lg:py-[12px]">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -329,7 +329,7 @@ const Index = () => {
           className="mb-14"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Hear from our partners
+            HEAR FROM OUR CLIENTS
           </p>
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
             What they say
