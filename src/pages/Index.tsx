@@ -71,7 +71,8 @@ const Bubble = ({ name, delay }: { name: string; delay: number }) => (
   </motion.div>
 );
 
-  const Index = () => { = useRef<HTMLDivElement>(null);
+const Index = () => {
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
