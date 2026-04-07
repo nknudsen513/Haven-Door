@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
@@ -7,11 +7,11 @@ import projectSchool from "@/assets/project-school.jpg";
 import projectMedical from "@/assets/project-medical.jpg";
 
 const fade = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
@@ -40,11 +40,9 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
       {/* NAV */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg">
-        <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-5">
-          <span className="font-heading text-2xl tracking-tight">
-            Haven Door
-          </span>
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/50">
+        <div className="flex items-center justify-between px-6 md:px-10 py-4">
+          <span className="font-heading text-2xl tracking-tight">Haven Door</span>
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
             <a href="#work" className="hover:text-foreground transition-colors">Work</a>
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
@@ -56,11 +54,21 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* HERO */}
-      <section className="pt-32 pb-20 md:pt-44 md:pb-28 px-6">
-        <div className="max-w-6xl mx-auto">
+      {/* HERO — full bleed image with overlay */}
+      <section className="relative h-screen min-h-[600px] flex items-end">
+        <div className="absolute inset-0">
+          <img
+            src={heroImg}
+            alt="Professional commercial door installation"
+            className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
+        </div>
+        <div className="relative z-10 w-full px-6 md:px-10 pb-16 md:pb-24">
           <motion.p
-            className="text-primary text-sm font-medium tracking-wide uppercase mb-6"
+            className="text-primary-foreground/70 text-sm font-medium tracking-widest uppercase mb-4"
             initial="hidden"
             animate="visible"
             variants={fade}
@@ -68,7 +76,7 @@ const Index = () => {
             Commercial door installation
           </motion.p>
           <motion.h1
-            className="font-heading text-5xl md:text-7xl lg:text-8xl leading-[0.95] max-w-4xl"
+            className="font-heading text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-primary-foreground max-w-3xl"
             initial="hidden"
             animate="visible"
             variants={fade}
@@ -79,7 +87,7 @@ const Index = () => {
             <span className="italic text-primary">Really well.</span>
           </motion.h1>
           <motion.p
-            className="mt-8 text-muted-foreground max-w-md text-lg leading-relaxed"
+            className="mt-6 text-primary-foreground/60 max-w-md text-lg leading-relaxed"
             initial="hidden"
             animate="visible"
             variants={fade}
@@ -88,7 +96,7 @@ const Index = () => {
             Schools, hotels, medical centers — if it needs a door, we've probably installed a thousand of them.
           </motion.p>
           <motion.div
-            className="mt-10"
+            className="mt-8 flex items-center gap-4"
             initial="hidden"
             animate="visible"
             variants={fade}
@@ -101,29 +109,18 @@ const Index = () => {
             </Button>
           </motion.div>
         </div>
-      </section>
-
-      {/* HERO IMAGE */}
-      <section className="px-6">
         <motion.div
-          className="max-w-6xl mx-auto rounded-2xl overflow-hidden"
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
         >
-          <img
-            src={heroImg}
-            alt="Professional commercial door installation"
-            className="w-full h-[50vh] md:h-[65vh] object-cover"
-            width={1920}
-            height={1080}
-          />
+          <ChevronDown className="w-6 h-6 text-primary-foreground/40" />
         </motion.div>
       </section>
 
-      {/* STATS BAR */}
-      <section className="py-16 px-6">
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+      {/* STATS — full width dark bar */}
+      <section className="surface-dark">
+        <div className="grid grid-cols-2 md:grid-cols-4">
           {[
             { num: "6+", label: "Years in business" },
             { num: "1,200+", label: "Doors in one project" },
@@ -132,7 +129,7 @@ const Index = () => {
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
-              className="text-center"
+              className="text-center py-12 md:py-16 border-r border-surface-dark-foreground/10 last:border-r-0"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -142,85 +139,31 @@ const Index = () => {
               <span className="font-heading text-4xl md:text-5xl text-primary">
                 {stat.num}
               </span>
-              <p className="mt-2 text-sm text-muted-foreground">{stat.label}</p>
+              <p className="mt-2 text-sm text-surface-dark-foreground/50">{stat.label}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* PROJECTS */}
-      <section id="work" className="section-padding surface-dark">
-        <div className="max-w-6xl mx-auto">
+      {/* ABOUT — wide two-column with big text */}
+      <section id="about" className="px-6 md:px-10 py-24 lg:py-32">
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
           <motion.div
-            className="mb-14"
+            className="lg:col-span-2"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fade}
           >
-            <p className="text-primary text-sm font-medium tracking-wide uppercase mb-4">
-              Selected work
-            </p>
-            <h2 className="font-heading text-4xl md:text-5xl">
-              Projects we're proud of
-            </h2>
-          </motion.div>
-          <div className="space-y-12">
-            {projects.map((project, i) => (
-              <motion.div
-                key={project.title}
-                className="grid md:grid-cols-2 gap-6 items-center"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-80px" }}
-                variants={fade}
-                custom={i}
-              >
-                <div className={`rounded-xl overflow-hidden ${i % 2 === 1 ? "md:order-2" : ""}`}>
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    width={960}
-                    height={640}
-                    className="w-full aspect-[3/2] object-cover hover:scale-[1.03] transition-transform duration-700"
-                  />
-                </div>
-                <div className={`py-4 ${i % 2 === 1 ? "md:order-1 md:text-right" : ""}`}>
-                  <h3 className="font-heading text-2xl md:text-3xl mb-3">
-                    {project.title}
-                  </h3>
-                  <p className="text-surface-dark-foreground/60 text-sm uppercase tracking-wider mb-2">
-                    {project.location}
-                  </p>
-                  <p className="text-surface-dark-foreground/75 leading-relaxed">
-                    {project.scope}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ABOUT */}
-      <section id="about" className="section-padding">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-start">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-          >
-            <p className="text-primary text-sm font-medium tracking-wide uppercase mb-4">
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
               About us
             </p>
-            <h2 className="font-heading text-4xl md:text-5xl leading-tight">
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
               Straightforward people doing honest work
             </h2>
           </motion.div>
           <motion.div
-            className="space-y-5 text-muted-foreground leading-relaxed"
+            className="lg:col-span-3 space-y-6 text-muted-foreground leading-relaxed text-lg"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -233,33 +176,18 @@ const Index = () => {
             <p>
               We're not the biggest crew out there — but we show up on time, communicate clearly, and do excellent work. Whether it's ten doors or twelve hundred, we treat every project the same.
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SERVICES */}
-      <section className="px-6 pb-20 lg:pb-28">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="bg-card rounded-2xl p-10 md:p-14 border border-border"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-          >
-            <h3 className="font-heading text-2xl md:text-3xl mb-8">What we install</h3>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-4">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 pt-4">
               {[
                 "Commercial Doors",
                 "Pre-Hung Doors",
                 "Barn Doors",
                 "Eliason Doors",
                 "Bi-Fold Doors",
-                "All Required Hardware",
+                "All Hardware",
               ].map((s) => (
-                <div key={s} className="flex items-center gap-3 py-3 border-b border-border last:border-0">
-                  <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
-                  <span className="text-sm font-medium">{s}</span>
+                <div key={s} className="flex items-center gap-3 py-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                  <span className="text-sm font-medium text-foreground">{s}</span>
                 </div>
               ))}
             </div>
@@ -267,72 +195,129 @@ const Index = () => {
         </div>
       </section>
 
-      {/* TESTIMONIAL */}
-      <section className="section-padding surface-dark">
+      {/* PROJECTS — full-bleed stacked images */}
+      <section id="work">
         <motion.div
-          className="max-w-3xl mx-auto text-center"
+          className="px-6 md:px-10 pt-20 pb-12 surface-dark"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
         >
-          <blockquote className="font-heading text-2xl md:text-3xl leading-snug italic text-surface-dark-foreground/90">
-            "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. I would definitely use Haven again."
-          </blockquote>
-          <p className="mt-8 text-sm font-medium text-primary">Heather</p>
-          <p className="text-sm text-surface-dark-foreground/50">
-            Project Manager, Nationwide General Contractor
+          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
+            Selected work
           </p>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-surface-dark-foreground">
+            Projects we're proud of
+          </h2>
+        </motion.div>
+
+        {projects.map((project, i) => (
+          <motion.div
+            key={project.title}
+            className="relative group"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fade}
+            custom={i}
+          >
+            <div className="relative h-[70vh] min-h-[400px] overflow-hidden">
+              <img
+                src={project.image}
+                alt={project.title}
+                loading="lazy"
+                width={1920}
+                height={1080}
+                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent" />
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-10 md:pb-14">
+              <h3 className="font-heading text-3xl md:text-4xl lg:text-5xl text-primary-foreground mb-2">
+                {project.title}
+              </h3>
+              <p className="text-primary-foreground/50 text-sm uppercase tracking-widest mb-1">
+                {project.location}
+              </p>
+              <p className="text-primary-foreground/70 text-lg max-w-lg">
+                {project.scope}
+              </p>
+            </div>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* TESTIMONIAL — full width, minimal */}
+      <section className="px-6 md:px-10 py-24 lg:py-32">
+        <motion.div
+          className="max-w-3xl"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fade}
+        >
+          <blockquote className="font-heading text-3xl md:text-4xl lg:text-5xl leading-snug italic">
+            "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer."
+          </blockquote>
+          <div className="mt-8">
+            <p className="text-sm font-medium text-primary">Heather</p>
+            <p className="text-sm text-muted-foreground">
+              Project Manager, Nationwide General Contractor
+            </p>
+          </div>
         </motion.div>
       </section>
 
-      {/* CONTACT */}
-      <section id="contact" className="section-padding">
-        <div className="max-w-6xl mx-auto">
+      {/* CONTACT — full width dark */}
+      <section id="contact" className="surface-dark">
+        <div className="px-6 md:px-10 py-24 lg:py-32">
           <motion.div
-            className="grid md:grid-cols-2 gap-16"
+            className="grid lg:grid-cols-2 gap-16 lg:gap-24"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fade}
           >
             <div>
-              <p className="text-primary text-sm font-medium tracking-wide uppercase mb-4">
+              <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
                 Get in touch
               </p>
-              <h2 className="font-heading text-4xl md:text-5xl leading-tight mb-6">
-                Got a project? Let's talk.
+              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight text-surface-dark-foreground mb-6">
+                Got a project?
+                <br />
+                Let's talk.
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-surface-dark-foreground/60 text-lg leading-relaxed max-w-md">
                 Whether you need ten doors or a thousand, we'd love to hear about your project.
               </p>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-4">
               <a
                 href="tel:6158783056"
-                className="flex items-center gap-4 p-5 rounded-xl border border-border hover:border-primary/40 transition-colors group"
+                className="flex items-center gap-5 p-6 rounded-xl border border-surface-dark-foreground/10 hover:border-primary/40 transition-colors"
               >
-                <Phone className="w-5 h-5 text-primary" />
+                <Phone className="w-5 h-5 text-primary shrink-0" />
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Phone</p>
-                  <p className="font-medium">615-878-3056</p>
+                  <p className="text-xs text-surface-dark-foreground/40 uppercase tracking-widest">Phone</p>
+                  <p className="font-medium text-surface-dark-foreground">615-878-3056</p>
                 </div>
               </a>
               <a
                 href="mailto:jake@havendoorinstallation.com"
-                className="flex items-center gap-4 p-5 rounded-xl border border-border hover:border-primary/40 transition-colors group"
+                className="flex items-center gap-5 p-6 rounded-xl border border-surface-dark-foreground/10 hover:border-primary/40 transition-colors"
               >
-                <Mail className="w-5 h-5 text-primary" />
+                <Mail className="w-5 h-5 text-primary shrink-0" />
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Email</p>
-                  <p className="font-medium">jake@havendoorinstallation.com</p>
+                  <p className="text-xs text-surface-dark-foreground/40 uppercase tracking-widest">Email</p>
+                  <p className="font-medium text-surface-dark-foreground">jake@havendoorinstallation.com</p>
                 </div>
               </a>
-              <div className="flex items-center gap-4 p-5 rounded-xl border border-border">
-                <MapPin className="w-5 h-5 text-primary" />
+              <div className="flex items-center gap-5 p-6 rounded-xl border border-surface-dark-foreground/10">
+                <MapPin className="w-5 h-5 text-primary shrink-0" />
                 <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider">Location</p>
-                  <p className="font-medium">323 N Margin St, Franklin, TN 37064</p>
+                  <p className="text-xs text-surface-dark-foreground/40 uppercase tracking-widest">Location</p>
+                  <p className="font-medium text-surface-dark-foreground">323 N Margin St, Franklin, TN 37064</p>
                 </div>
               </div>
             </div>
@@ -341,7 +326,7 @@ const Index = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="surface-dark px-6 py-8 text-center text-sm text-surface-dark-foreground/40">
+      <footer className="bg-background px-6 md:px-10 py-8 text-center text-sm text-muted-foreground">
         <p>© {new Date().getFullYear()} Haven Door Installation</p>
       </footer>
     </div>
