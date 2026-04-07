@@ -100,9 +100,11 @@ const Index = () => {
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
-          <Button size="sm" variant="outline" asChild className="rounded-full">
-            <a href="#contact">Contact us</a>
-          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button size="sm" variant="outline" asChild className="rounded-full">
+              <a href="#contact">Contact us</a>
+            </Button>
+          </motion.div>
         </div>
       </nav>
 
