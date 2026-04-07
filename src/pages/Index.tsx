@@ -177,46 +177,66 @@ const Index = () => {
 
       {/* WHAT WE INSTALL — bubbles */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fade}
-          className="mb-16"
-        >
-          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            What we install
-          </p>
-          <h2 className="font-heading text-4xl md:text-5xl">
-            Every door, done right
-          </h2>
-        </motion.div>
-        <div className="flex flex-wrap gap-4 md:gap-5 max-w-5xl">
-          {doorTypes.map((door, i) => (
-            <motion.div
-              key={door.name}
-              className="group"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fade}
-              custom={i * 0.4}
-            >
-              <div className="flex items-center gap-3 px-6 py-4 md:px-8 md:py-5 rounded-full border border-border bg-card hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg">
-                <span className="text-primary group-hover:text-primary-foreground transition-colors shrink-0">
-                  {door.icon}
-                </span>
-                <div>
-                  <p className="font-heading text-base md:text-lg group-hover:text-primary-foreground transition-colors whitespace-nowrap">
-                    {door.name}
-                  </p>
-                  <p className="text-xs text-muted-foreground group-hover:text-primary-foreground/70 transition-colors hidden md:block">
-                    {door.desc}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+          <motion.div
+            className="lg:col-span-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+          >
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
+              What we install
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl">
+              Every door, done right
+            </h2>
+          </motion.div>
+          <div className="lg:col-span-3 flex flex-wrap justify-center gap-3 md:gap-4">
+            {doorTypes.map((door, i) => {
+              const sizes = [
+                "px-7 py-4 text-base",
+                "px-8 py-5 text-lg",
+                "px-6 py-3 text-sm",
+                "px-9 py-5 text-lg",
+                "px-7 py-4 text-base",
+                "px-6 py-3 text-sm",
+                "px-8 py-4 text-base",
+                "px-7 py-5 text-lg",
+                "px-6 py-3 text-sm",
+                "px-8 py-4 text-base",
+              ];
+              const offsets = [
+                "translate-y-0",
+                "-translate-y-2",
+                "translate-y-3",
+                "-translate-y-1",
+                "translate-y-2",
+                "-translate-y-3",
+                "translate-y-1",
+                "-translate-y-2",
+                "translate-y-4",
+                "-translate-y-1",
+              ];
+              return (
+                <motion.div
+                  key={door.name}
+                  className={`group ${offsets[i % offsets.length]}`}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fade}
+                  custom={i * 0.3}
+                >
+                  <div className={`${sizes[i % sizes.length]} rounded-full border border-border bg-card hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg`}>
+                    <p className="font-heading group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                      {door.name}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
