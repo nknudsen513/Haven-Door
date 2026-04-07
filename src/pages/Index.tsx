@@ -166,7 +166,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — interactive cards */}
+      {/* WHAT WE INSTALL — accordion-style interactive list */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
         <motion.div
           initial="hidden"
@@ -177,34 +177,82 @@ const Index = () => {
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             What we install
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl mb-12">
+          <h2 className="font-heading text-4xl md:text-5xl mb-16">
             Every door, done right
           </h2>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {doorTypes.map((door, i) => (
-            <motion.div
-              key={door.name}
-              className="group relative p-8 rounded-2xl border border-border bg-card hover:bg-primary hover:border-primary transition-colors duration-300 cursor-default"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fade}
-              custom={i * 0.5}
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-heading text-xl md:text-2xl group-hover:text-primary-foreground transition-colors">
+        <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start">
+          {/* Left: interactive list */}
+          <div className="space-y-0 border-t border-border">
+            {doorTypes.map((door, i) => (
+              <motion.button
+                key={door.name}
+                onClick={() => setActiveDoor(i)}
+                className={`w-full text-left border-b border-border py-6 px-4 flex items-center gap-6 transition-all duration-300 group ${
+                  activeDoor === i ? "bg-primary/5" : "hover:bg-muted/50"
+                }`}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fade}
+                custom={i * 0.3}
+              >
+                <span className={`text-xs font-mono tracking-wider transition-colors ${
+                  activeDoor === i ? "text-primary" : "text-muted-foreground/40"
+                }`}>
+                  {door.number}
+                </span>
+                <div className="flex-1">
+                  <h3 className={`font-heading text-xl md:text-2xl transition-colors ${
+                    activeDoor === i ? "text-primary" : "text-foreground"
+                  }`}>
                     {door.name}
                   </h3>
-                  <p className="mt-2 text-sm text-muted-foreground group-hover:text-primary-foreground/70 transition-colors">
-                    {door.desc}
-                  </p>
+                  <AnimatePresence>
+                    {activeDoor === i && (
+                      <motion.p
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-sm text-muted-foreground mt-2 overflow-hidden"
+                      >
+                        {door.desc}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <ArrowRight className="w-5 h-5 mt-1 text-muted-foreground/30 group-hover:text-primary-foreground/60 shrink-0 -rotate-45 group-hover:rotate-0 transition-all duration-300" />
-              </div>
-            </motion.div>
-          ))}
+                <div className={`transition-colors ${
+                  activeDoor === i ? "text-primary" : "text-muted-foreground/20"
+                }`}>
+                  {door.icon}
+                </div>
+              </motion.button>
+            ))}
+          </div>
+          {/* Right: large active icon display */}
+          <div className="hidden lg:flex items-center justify-center min-h-[400px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeDoor}
+                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                exit={{ opacity: 0, scale: 0.8, rotate: 10 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col items-center gap-8 text-center"
+              >
+                <div className="w-32 h-32 rounded-3xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
+                  <div className="scale-[2.5]">
+                    {doorTypes[activeDoor].icon}
+                  </div>
+                </div>
+                <div>
+                  <p className="font-heading text-3xl text-foreground">{doorTypes[activeDoor].name}</p>
+                  <p className="text-muted-foreground mt-2 max-w-xs">{doorTypes[activeDoor].desc}</p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </section>
 
