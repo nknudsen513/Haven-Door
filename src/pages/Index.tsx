@@ -5,7 +5,7 @@ import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectSchool from "@/assets/project-school.jpg";
 import projectMedical from "@/assets/project-medical.jpg";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
