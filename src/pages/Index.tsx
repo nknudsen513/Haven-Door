@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown, DoorOpen, Warehouse, SlidersHorizontal, RotateCcw, FoldHorizontal, Wrench } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown, DoorOpen, Warehouse, ArrowLeftRight, ChevronsLeftRight, FoldHorizontal, Wrench, Shield, TreePine, Flame, Accessibility } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
@@ -46,9 +46,13 @@ const projects = [
 const doorTypes: { name: string; desc: string; icon: ReactNode }[] = [
   { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-6 h-6" /> },
   { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-6 h-6" /> },
-  { name: "Barn Doors", desc: "Sliding hardware for modern interiors", icon: <SlidersHorizontal className="w-6 h-6" /> },
-  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <RotateCcw className="w-6 h-6" /> },
+  { name: "Barn Doors", desc: "Rustic sliding hardware for modern interiors", icon: <ArrowLeftRight className="w-6 h-6" /> },
+  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <ChevronsLeftRight className="w-6 h-6" /> },
   { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-6 h-6" /> },
+  { name: "Hollow Metal Doors", desc: "Steel frames built for durability & fire-rating", icon: <Shield className="w-6 h-6" /> },
+  { name: "Wood Doors", desc: "Solid core & veneer options for every finish", icon: <TreePine className="w-6 h-6" /> },
+  { name: "Fire-Rated Doors", desc: "Code-compliant doors for life safety", icon: <Flame className="w-6 h-6" /> },
+  { name: "ADA-Compliant Doors", desc: "Accessible hardware & closers for every occupant", icon: <Accessibility className="w-6 h-6" /> },
   { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-6 h-6" /> },
 ];
 
@@ -178,7 +182,7 @@ const Index = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
-          className="text-center mb-16"
+          className="mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             What we install
@@ -187,7 +191,7 @@ const Index = () => {
             Every door, done right
           </h2>
         </motion.div>
-        <div className="flex flex-wrap justify-center gap-4 md:gap-5 max-w-4xl mx-auto">
+        <div className="flex flex-wrap gap-4 md:gap-5 max-w-5xl">
           {doorTypes.map((door, i) => (
             <motion.div
               key={door.name}
