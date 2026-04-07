@@ -270,13 +270,13 @@ const Index = () => {
                   Interior view
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-                  <h3 className="font-heading text-2xl md:text-3xl text-primary-foreground mb-1">
+                  <h3 className="font-heading text-xl sm:text-2xl md:text-3xl text-primary-foreground mb-1">
                     {project.title}
                   </h3>
                   <p className="text-primary-foreground/50 text-xs uppercase tracking-widest mb-1">
                     {project.location}
                   </p>
-                  <p className="text-primary-foreground/70 text-sm md:text-base">
+                  <p className="text-primary-foreground/70 text-xs sm:text-sm md:text-base">
                     {project.scope}
                   </p>
                 </div>
