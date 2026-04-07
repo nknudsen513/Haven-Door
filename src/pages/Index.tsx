@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight, ChevronDown } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectSchool from "@/assets/project-school.jpg";
 import projectMedical from "@/assets/project-medical.jpg";
+import { useRef, useState } from "react";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -36,7 +37,35 @@ const projects = [
   },
 ];
 
+const doorTypes = [
+  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces" },
+  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs" },
+  { name: "Barn Doors", desc: "Sliding hardware for modern interiors" },
+  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas" },
+  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems" },
+  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works" },
+];
+
 const Index = () => {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScroll = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+  };
+
+  const scroll = (dir: "left" | "right") => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const cardWidth = el.clientWidth / 2;
+    el.scrollBy({ left: dir === "left" ? -cardWidth : cardWidth, behavior: "smooth" });
+    setTimeout(checkScroll, 400);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
       {/* NAV */}
@@ -54,8 +83,8 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* HERO — full bleed image with overlay */}
-      <section className="relative h-screen min-h-[600px] flex items-end">
+      {/* HERO — centered logo on full-bleed image */}
+      <section className="relative h-screen min-h-[600px] flex flex-col items-center justify-center">
         <div className="absolute inset-0">
           <img
             src={heroImg}
@@ -64,53 +93,36 @@ const Index = () => {
             width={1920}
             height={1080}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
+          <div className="absolute inset-0 bg-foreground/50" />
         </div>
-        <div className="relative z-10 w-full px-6 md:px-10 pb-16 md:pb-24">
-          <motion.p
-            className="text-primary-foreground/70 text-sm font-medium tracking-widest uppercase mb-4"
-            initial="hidden"
-            animate="visible"
-            variants={fade}
-          >
-            Commercial door installation
-          </motion.p>
-          <motion.h1
-            className="font-heading text-5xl md:text-7xl lg:text-8xl leading-[0.95] text-primary-foreground max-w-3xl"
-            initial="hidden"
-            animate="visible"
-            variants={fade}
-            custom={1}
-          >
-            We hang doors.
-            <br />
-            <span className="italic text-primary">Really well.</span>
-          </motion.h1>
-          <motion.p
-            className="mt-6 text-primary-foreground/60 max-w-md text-lg leading-relaxed"
-            initial="hidden"
-            animate="visible"
-            variants={fade}
-            custom={2}
-          >
-            Schools, hotels, medical centers — if it needs a door, we've probably installed a thousand of them.
-          </motion.p>
+        <div className="relative z-10 text-center px-6">
           <motion.div
-            className="mt-8 flex items-center gap-4"
-            initial="hidden"
-            animate="visible"
-            variants={fade}
-            custom={3}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h1 className="font-heading text-6xl md:text-8xl lg:text-9xl text-primary-foreground tracking-tight">
+              Haven Door
+            </h1>
+            <p className="mt-4 text-primary-foreground/50 text-sm md:text-base tracking-[0.3em] uppercase">
+              Commercial Door Installation
+            </p>
+          </motion.div>
+          <motion.div
+            className="mt-10"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
           >
             <Button size="lg" asChild className="rounded-full gap-2 px-8">
               <a href="#contact">
-                Let's talk <ArrowRight className="w-4 h-4" />
+                Get a quote <ArrowRight className="w-4 h-4" />
               </a>
             </Button>
           </motion.div>
         </div>
         <motion.div
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
         >
@@ -118,34 +130,7 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* STATS — full width dark bar */}
-      <section className="surface-dark">
-        <div className="grid grid-cols-2 md:grid-cols-4">
-          {[
-            { num: "6+", label: "Years in business" },
-            { num: "1,200+", label: "Doors in one project" },
-            { num: "3", label: "States served" },
-            { num: "350+", label: "Hotel room doors" },
-          ].map((stat, i) => (
-            <motion.div
-              key={stat.label}
-              className="text-center py-12 md:py-16 border-r border-surface-dark-foreground/10 last:border-r-0"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fade}
-              custom={i}
-            >
-              <span className="font-heading text-4xl md:text-5xl text-primary">
-                {stat.num}
-              </span>
-              <p className="mt-2 text-sm text-surface-dark-foreground/50">{stat.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ABOUT — wide two-column with big text */}
+      {/* ABOUT */}
       <section id="about" className="px-6 md:px-10 py-24 lg:py-32">
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-20 items-start">
           <motion.div
@@ -176,79 +161,129 @@ const Index = () => {
             <p>
               We're not the biggest crew out there — but we show up on time, communicate clearly, and do excellent work. Whether it's ten doors or twelve hundred, we treat every project the same.
             </p>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 pt-4">
-              {[
-                "Commercial Doors",
-                "Pre-Hung Doors",
-                "Barn Doors",
-                "Eliason Doors",
-                "Bi-Fold Doors",
-                "All Hardware",
-              ].map((s) => (
-                <div key={s} className="flex items-center gap-3 py-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                  <span className="text-sm font-medium text-foreground">{s}</span>
-                </div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* PROJECTS — full-bleed stacked images */}
-      <section id="work">
+      {/* WHAT WE INSTALL — interactive cards */}
+      <section className="px-6 md:px-10 pb-24 lg:pb-32">
         <motion.div
-          className="px-6 md:px-10 pt-20 pb-12 surface-dark"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Selected work
+            What we install
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-surface-dark-foreground">
-            Projects we're proud of
+          <h2 className="font-heading text-4xl md:text-5xl mb-12">
+            Every door, done right
           </h2>
         </motion.div>
-
-        {projects.map((project, i) => (
-          <motion.div
-            key={project.title}
-            className="relative group"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fade}
-            custom={i}
-          >
-            <div className="relative h-[70vh] min-h-[400px] overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title}
-                loading="lazy"
-                width={1920}
-                height={1080}
-                className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent" />
-            </div>
-            <div className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-10 md:pb-14">
-              <h3 className="font-heading text-3xl md:text-4xl lg:text-5xl text-primary-foreground mb-2">
-                {project.title}
-              </h3>
-              <p className="text-primary-foreground/50 text-sm uppercase tracking-widest mb-1">
-                {project.location}
-              </p>
-              <p className="text-primary-foreground/70 text-lg max-w-lg">
-                {project.scope}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {doorTypes.map((door, i) => (
+            <motion.div
+              key={door.name}
+              className="group relative p-8 rounded-2xl border border-border bg-card hover:bg-primary hover:border-primary transition-colors duration-300 cursor-default"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fade}
+              custom={i * 0.5}
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="font-heading text-xl md:text-2xl group-hover:text-primary-foreground transition-colors">
+                    {door.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground group-hover:text-primary-foreground/70 transition-colors">
+                    {door.desc}
+                  </p>
+                </div>
+                <ArrowRight className="w-5 h-5 mt-1 text-muted-foreground/30 group-hover:text-primary-foreground/60 shrink-0 -rotate-45 group-hover:rotate-0 transition-all duration-300" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
-      {/* TESTIMONIAL — full width, minimal */}
+      {/* PROJECTS CAROUSEL */}
+      <section id="work" className="surface-dark py-24 lg:py-32">
+        <div className="px-6 md:px-10 flex items-end justify-between mb-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+          >
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
+              Selected work
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-surface-dark-foreground">
+              Projects we're proud of
+            </h2>
+          </motion.div>
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              onClick={() => scroll("left")}
+              disabled={!canScrollLeft}
+              className="p-3 rounded-full border border-surface-dark-foreground/20 text-surface-dark-foreground/60 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              disabled={!canScrollRight}
+              className="p-3 rounded-full border border-surface-dark-foreground/20 text-surface-dark-foreground/60 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        <div
+          ref={carouselRef}
+          onScroll={checkScroll}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-10 pb-4 scrollbar-hide"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {projects.map((project) => (
+            <motion.div
+              key={project.title}
+              className="snap-start shrink-0 w-[85%] md:w-[calc(50%-12px)] group"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fade}
+            >
+              <div className="relative rounded-2xl overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  loading="lazy"
+                  width={960}
+                  height={640}
+                  className="w-full aspect-[3/2] object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <h3 className="font-heading text-2xl md:text-3xl text-primary-foreground mb-1">
+                    {project.title}
+                  </h3>
+                  <p className="text-primary-foreground/50 text-xs uppercase tracking-widest mb-1">
+                    {project.location}
+                  </p>
+                  <p className="text-primary-foreground/70 text-sm md:text-base">
+                    {project.scope}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* TESTIMONIAL */}
       <section className="px-6 md:px-10 py-24 lg:py-32">
         <motion.div
           className="max-w-3xl"
@@ -269,7 +304,7 @@ const Index = () => {
         </motion.div>
       </section>
 
-      {/* CONTACT — full width dark */}
+      {/* CONTACT */}
       <section id="contact" className="surface-dark">
         <div className="px-6 md:px-10 py-24 lg:py-32">
           <motion.div
