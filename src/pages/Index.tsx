@@ -79,7 +79,7 @@ const Index = () => {
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
           <Button size="sm" variant="outline" asChild className="rounded-full">
-            <a href="#contact">Get a quote</a>
+            <a href="#contact">Contact us</a>
           </Button>
         </div>
       </nav>
