@@ -279,7 +279,7 @@ const Index = () => {
                   loading="lazy"
                   width={960}
                   height={640}
-                  className="w-full aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
+                  className="w-full aspect-[4/5] sm:aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
                 />
                 <img
                   src={project.interiorImage}
