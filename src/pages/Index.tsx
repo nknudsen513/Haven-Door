@@ -1,10 +1,13 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown, DoorOpen, Warehouse, SlidersHorizontal, RotateCcw, FoldHorizontal, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectSchool from "@/assets/project-school.jpg";
 import projectMedical from "@/assets/project-medical.jpg";
+import projectHotelInterior from "@/assets/project-hotel-interior.jpg";
+import projectSchoolInterior from "@/assets/project-school-interior.jpg";
+import projectMedicalInterior from "@/assets/project-medical-interior.jpg";
 import { useRef, useState, type ReactNode } from "react";
 
 const fade = {
@@ -22,35 +25,37 @@ const projects = [
     location: "Nashville, TN",
     scope: "All doors & hardware — last-minute timeline save",
     image: projectSchool,
+    interiorImage: projectSchoolInterior,
   },
   {
     title: "Avid / Holiday Inn Dual Hotel",
     location: "Tennessee",
     scope: "350+ doors, frames & hardware across 168 rooms",
     image: projectHotel,
+    interiorImage: projectHotelInterior,
   },
   {
     title: "Meharry Medical Live Learn Center",
     location: "Nashville, TN",
     scope: "1,200+ doors installed — pre-hung, solid core & hollow metal",
     image: projectMedical,
+    interiorImage: projectMedicalInterior,
   },
 ];
 
-const doorTypes: { name: string; desc: string; icon: ReactNode; number: string }[] = [
-  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-8 h-8" />, number: "01" },
-  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-8 h-8" />, number: "02" },
-  { name: "Barn Doors", desc: "Sliding hardware for modern interiors", icon: <SlidersHorizontal className="w-8 h-8" />, number: "03" },
-  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <RotateCcw className="w-8 h-8" />, number: "04" },
-  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-8 h-8" />, number: "05" },
-  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-8 h-8" />, number: "06" },
+const doorTypes: { name: string; desc: string; icon: ReactNode }[] = [
+  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-6 h-6" /> },
+  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-6 h-6" /> },
+  { name: "Barn Doors", desc: "Sliding hardware for modern interiors", icon: <SlidersHorizontal className="w-6 h-6" /> },
+  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <RotateCcw className="w-6 h-6" /> },
+  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-6 h-6" /> },
+  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-6 h-6" /> },
 ];
 
 const Index = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [activeDoor, setActiveDoor] = useState(0);
 
   const checkScroll = () => {
     const el = carouselRef.current;
@@ -74,7 +79,7 @@ const Index = () => {
         <div className="flex items-center justify-between px-6 md:px-10 py-4">
           <span className="font-heading text-2xl tracking-tight">Haven Door</span>
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#work" className="hover:text-foreground transition-colors">Work</a>
+            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
@@ -84,7 +89,7 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* HERO — centered logo on full-bleed image */}
+      {/* HERO */}
       <section className="relative h-screen min-h-[600px] flex flex-col items-center justify-center">
         <div className="absolute inset-0">
           <img
@@ -166,98 +171,53 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — accordion-style interactive list */}
+      {/* WHAT WE INSTALL — bubbles */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
+          className="text-center mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             What we install
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl mb-16">
+          <h2 className="font-heading text-4xl md:text-5xl">
             Every door, done right
           </h2>
         </motion.div>
-        <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start">
-          {/* Left: interactive list */}
-          <div className="space-y-0 border-t border-border">
-            {doorTypes.map((door, i) => (
-              <motion.button
-                key={door.name}
-                onClick={() => setActiveDoor(i)}
-                className={`w-full text-left border-b border-border py-6 px-4 flex items-center gap-6 transition-all duration-300 group ${
-                  activeDoor === i ? "bg-primary/5" : "hover:bg-muted/50"
-                }`}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fade}
-                custom={i * 0.3}
-              >
-                <span className={`text-xs font-mono tracking-wider transition-colors ${
-                  activeDoor === i ? "text-primary" : "text-muted-foreground/40"
-                }`}>
-                  {door.number}
-                </span>
-                <div className="flex-1">
-                  <h3 className={`font-heading text-xl md:text-2xl transition-colors ${
-                    activeDoor === i ? "text-primary" : "text-foreground"
-                  }`}>
-                    {door.name}
-                  </h3>
-                  <AnimatePresence>
-                    {activeDoor === i && (
-                      <motion.p
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="text-sm text-muted-foreground mt-2 overflow-hidden"
-                      >
-                        {door.desc}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
-                </div>
-                <div className={`transition-colors ${
-                  activeDoor === i ? "text-primary" : "text-muted-foreground/20"
-                }`}>
+        <div className="flex flex-wrap justify-center gap-4 md:gap-5 max-w-4xl mx-auto">
+          {doorTypes.map((door, i) => (
+            <motion.div
+              key={door.name}
+              className="group"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fade}
+              custom={i * 0.4}
+            >
+              <div className="flex items-center gap-3 px-6 py-4 md:px-8 md:py-5 rounded-full border border-border bg-card hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg">
+                <span className="text-primary group-hover:text-primary-foreground transition-colors shrink-0">
                   {door.icon}
-                </div>
-              </motion.button>
-            ))}
-          </div>
-          {/* Right: large active icon display */}
-          <div className="hidden lg:flex items-center justify-center min-h-[400px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeDoor}
-                initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, scale: 0.8, rotate: 10 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col items-center gap-8 text-center"
-              >
-                <div className="w-32 h-32 rounded-3xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary">
-                  <div className="scale-[2.5]">
-                    {doorTypes[activeDoor].icon}
-                  </div>
-                </div>
+                </span>
                 <div>
-                  <p className="font-heading text-3xl text-foreground">{doorTypes[activeDoor].name}</p>
-                  <p className="text-muted-foreground mt-2 max-w-xs">{doorTypes[activeDoor].desc}</p>
+                  <p className="font-heading text-base md:text-lg group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                    {door.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground group-hover:text-primary-foreground/70 transition-colors hidden md:block">
+                    {door.desc}
+                  </p>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
       {/* PROJECTS CAROUSEL */}
-      <section id="work" className="surface-dark py-24 lg:py-32">
+      <section id="projects" className="surface-dark py-24 lg:py-32">
         <div className="px-6 md:px-10 flex items-end justify-between mb-12">
           <motion.div
             initial="hidden"
@@ -305,16 +265,29 @@ const Index = () => {
               viewport={{ once: true }}
               variants={fade}
             >
-              <div className="relative rounded-2xl overflow-hidden">
+              <div className="relative rounded-2xl overflow-hidden cursor-pointer">
+                {/* Exterior (default) */}
                 <img
                   src={project.image}
-                  alt={project.title}
+                  alt={`${project.title} — exterior`}
                   loading="lazy"
                   width={960}
                   height={640}
-                  className="w-full aspect-[3/2] object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                  className="w-full aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
+                />
+                {/* Interior (revealed on hover) */}
+                <img
+                  src={project.interiorImage}
+                  alt={`${project.title} — interior`}
+                  loading="lazy"
+                  width={960}
+                  height={640}
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-background/80 text-foreground text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                  Interior view
+                </div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                   <h3 className="font-heading text-2xl md:text-3xl text-primary-foreground mb-1">
                     {project.title}
@@ -329,6 +302,14 @@ const Index = () => {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        <div className="flex justify-center mt-12">
+          <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-surface-dark-foreground/20 text-surface-dark-foreground hover:border-primary hover:text-primary">
+            <a href="#contact">
+              See more projects <ArrowRight className="w-4 h-4" />
+            </a>
+          </Button>
         </div>
       </section>
 
