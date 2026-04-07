@@ -169,65 +169,98 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — bubbles */}
-      <section className="px-6 md:px-10 pb-24 lg:pb-32">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-            className="text-center mb-14"
-          >
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-              What we install
-            </p>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
-              Every door, done right
-            </h2>
-            <p className="mt-4 text-muted-foreground text-lg max-w-lg mx-auto">
-              From schools to hotels, we supply and install every type of commercial door and the hardware to match.
-            </p>
-          </motion.div>
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-            {doorTypes.map((name, i) => {
-              const sizeClasses = [
-                "px-7 py-3.5 text-base",
-                "px-8 py-4 text-lg",
-                "px-6 py-3 text-sm",
-                "px-9 py-4.5 text-lg",
-                "px-6 py-3 text-sm",
-                "px-7 py-3.5 text-base",
-                "px-8 py-4 text-lg",
-                "px-6 py-3 text-sm",
-                "px-7 py-3.5 text-base",
-                "px-9 py-4.5 text-lg",
-                "px-6 py-3 text-sm",
-                "px-8 py-4 text-lg",
-                "px-7 py-3.5 text-base",
-                "px-6 py-3 text-sm",
-              ];
-              return (
-                <motion.div
-                  key={name}
-                  className="group cursor-default"
-                  initial={{ opacity: 0, scale: 0.7 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.04, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ scale: 1.12, y: -3, transition: { duration: 0.2 } }}
-                >
-                  <div
-                    className={`${sizeClasses[i]} rounded-full border border-border/50 bg-card/70 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-all duration-300 shadow-sm group-hover:shadow-[0_10px_36px_-6px_hsl(var(--primary)/0.35)]`}
-                  >
-                    <p className="font-heading text-foreground/80 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
-                      {name}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+      {/* WHAT WE INSTALL — scattered bubbles */}
+      <section className="px-6 md:px-10 pb-24 lg:pb-32 overflow-hidden">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fade}
+          className="text-center mb-20"
+        >
+          <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
+            What we install
+          </p>
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
+            Every door, done right
+          </h2>
+        </motion.div>
+
+        {/* Desktop: scattered absolute layout */}
+        <div className="hidden md:block relative w-full max-w-5xl mx-auto" style={{ height: 420 }}>
+          {doorTypes.map((name, i) => {
+            const spots: { x: number; y: number; s: number; r: number }[] = [
+              { x: 2, y: 0, s: 1.15, r: -2 },
+              { x: 30, y: 8, s: 1.0, r: 1 },
+              { x: 58, y: 0, s: 0.9, r: -1 },
+              { x: 82, y: 12, s: 1.1, r: 2 },
+              { x: 10, y: 22, s: 0.95, r: 1.5 },
+              { x: 42, y: 28, s: 1.2, r: -1.5 },
+              { x: 72, y: 24, s: 0.88, r: 0.5 },
+              { x: 0, y: 44, s: 1.05, r: -1 },
+              { x: 24, y: 48, s: 0.92, r: 2 },
+              { x: 52, y: 46, s: 1.1, r: -2 },
+              { x: 78, y: 42, s: 0.95, r: 1 },
+              { x: 14, y: 66, s: 1.08, r: -0.5 },
+              { x: 40, y: 70, s: 0.9, r: 1.5 },
+              { x: 66, y: 64, s: 1.12, r: -1 },
+            ];
+            const spot = spots[i];
+            return (
+              <motion.div
+                key={name}
+                className="absolute group cursor-default"
+                style={{
+                  left: `${spot.x}%`,
+                  top: spot.y * 4.2,
+                  rotate: spot.r,
+                  zIndex: i % 3 === 0 ? 2 : 1,
+                }}
+                initial={{ opacity: 0, scale: 0.4, y: 30 }}
+                whileInView={{ opacity: 1, scale: spot.s, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  delay: i * 0.04,
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                whileHover={{
+                  scale: spot.s * 1.18,
+                  rotate: 0,
+                  y: -6,
+                  zIndex: 10,
+                  transition: { type: "spring", stiffness: 300, damping: 15 },
+                }}
+              >
+                <div className="px-6 py-3.5 md:px-8 md:py-4 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-colors duration-300 shadow-[0_4px_20px_-6px_hsl(var(--foreground)/0.08)] group-hover:shadow-[0_14px_40px_-8px_hsl(var(--primary)/0.45)]">
+                  <p className="font-heading text-sm md:text-base text-foreground/70 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                    {name}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Mobile: flowing flex wrap */}
+        <div className="md:hidden flex flex-wrap justify-center gap-3">
+          {doorTypes.map((name, i) => (
+            <motion.div
+              key={name}
+              className="group cursor-default"
+              initial={{ opacity: 0, scale: 0.7 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.03, duration: 0.4 }}
+              whileHover={{ scale: 1.1, y: -3, transition: { type: "spring", stiffness: 300, damping: 15 } }}
+            >
+              <div className="px-5 py-3 rounded-full border border-border/50 bg-card/80 group-hover:bg-primary group-hover:border-primary transition-colors duration-300 shadow-sm group-hover:shadow-[0_10px_30px_-6px_hsl(var(--primary)/0.4)]">
+                <p className="font-heading text-sm text-foreground/70 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                  {name}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
