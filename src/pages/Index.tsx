@@ -182,7 +182,7 @@ const Index = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
-          className="text-center mb-16"
+          className="mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             What we install
