@@ -290,37 +290,12 @@ const Index = () => {
       </section>
 
       {/* WHAT WE INSTALL */}
-      <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
+      <section className="px-6 md:px-10 py-24 overflow-hidden lg:py-[12px]">
         <div className="max-w-5xl mx-auto">
           <motion.div
-            className="text-center mb-12"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fade}
-          >
-            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">
-              What we install
-            </p>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
-              Every door, done right
-            </h2>
-          </motion.div>
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-3 md:mb-4">
-            {doorTypes.slice(0, 4).map((name, i) => (
-              <Bubble key={name} name={name} delay={i * 0.04} />
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-            {doorTypes.slice(4).map((name, i) => (
-              <Bubble key={name} name={name} delay={(i + 4) * 0.04} />
-            ))}
-          </div>
-        </div>
-      </section>
-
+...
       {/* TESTIMONIALS */}
-      <section className="px-6 md:px-10 py-24 lg:py-32">
+      <section className="px-6 md:px-10 py-24 lg:py-[12px]">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -329,7 +304,7 @@ const Index = () => {
           className="mb-14"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
-            Hear from our partners
+            HEAR FROM OUR CLIENTS
           </p>
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
             What they say
