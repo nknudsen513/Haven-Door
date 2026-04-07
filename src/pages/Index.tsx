@@ -172,28 +172,145 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — accordion-style interactive list */}
+      {/* WHAT WE INSTALL — floating bubbles */}
       <section className="px-6 md:px-10 pb-24 lg:pb-32">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fade}
+          className="text-center mb-16"
         >
           <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
             What we install
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl mb-16">
+          <h2 className="font-heading text-4xl md:text-5xl">
             Every door, done right
           </h2>
         </motion.div>
-        <div className="grid lg:grid-cols-2 gap-0 lg:gap-16 items-start">
-          {/* Left: interactive list */}
-          <div className="space-y-0 border-t border-border">
-            {doorTypes.map((door, i) => (
-              <motion.button
-                key={door.name}
-                onClick={() => setActiveDoor(i)}
+        <div className="flex flex-wrap justify-center gap-4 md:gap-5 max-w-4xl mx-auto">
+          {doorTypes.map((door, i) => (
+            <motion.div
+              key={door.name}
+              className="group relative"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fade}
+              custom={i * 0.4}
+            >
+              <div className="flex items-center gap-3 px-6 py-4 md:px-8 md:py-5 rounded-full border border-border bg-card hover:bg-primary hover:border-primary hover:scale-105 transition-all duration-300 cursor-default shadow-sm hover:shadow-lg">
+                <span className="text-primary group-hover:text-primary-foreground transition-colors shrink-0">
+                  {door.icon}
+                </span>
+                <div>
+                  <p className="font-heading text-base md:text-lg group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                    {door.name}
+                  </p>
+                  <p className="text-xs text-muted-foreground group-hover:text-primary-foreground/70 transition-colors hidden md:block">
+                    {door.desc}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* PROJECTS CAROUSEL */}
+      <section id="projects" className="surface-dark py-24 lg:py-32">
+        <div className="px-6 md:px-10 flex items-end justify-between mb-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fade}
+          >
+            <p className="text-primary text-sm font-medium tracking-widest uppercase mb-4">
+              Selected work
+            </p>
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl text-surface-dark-foreground">
+              Projects we're proud of
+            </h2>
+          </motion.div>
+          <div className="hidden md:flex items-center gap-2">
+            <button
+              onClick={() => scroll("left")}
+              disabled={!canScrollLeft}
+              className="p-3 rounded-full border border-surface-dark-foreground/20 text-surface-dark-foreground/60 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => scroll("right")}
+              disabled={!canScrollRight}
+              className="p-3 rounded-full border border-surface-dark-foreground/20 text-surface-dark-foreground/60 hover:border-primary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            >
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        <div
+          ref={carouselRef}
+          onScroll={checkScroll}
+          className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-10 pb-4 scrollbar-hide"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {projects.map((project) => (
+            <motion.div
+              key={project.title}
+              className="snap-start shrink-0 w-[85%] md:w-[calc(50%-12px)] group"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fade}
+            >
+              <div className="relative rounded-2xl overflow-hidden cursor-pointer">
+                <img
+                  src={project.image}
+                  alt={`${project.title} — exterior`}
+                  loading="lazy"
+                  width={960}
+                  height={640}
+                  className="w-full aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
+                />
+                <img
+                  src={project.interiorImage}
+                  alt={`${project.title} — interior`}
+                  loading="lazy"
+                  width={960}
+                  height={640}
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
+                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-background/80 text-foreground text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-sm">
+                  Interior view
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                  <h3 className="font-heading text-2xl md:text-3xl text-primary-foreground mb-1">
+                    {project.title}
+                  </h3>
+                  <p className="text-primary-foreground/50 text-xs uppercase tracking-widest mb-1">
+                    {project.location}
+                  </p>
+                  <p className="text-primary-foreground/70 text-sm md:text-base">
+                    {project.scope}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="flex justify-center mt-12">
+          <Button variant="outline" size="lg" asChild className="rounded-full gap-2 border-surface-dark-foreground/20 text-surface-dark-foreground hover:border-primary hover:text-primary">
+            <a href="#contact">
+              See more projects <ArrowRight className="w-4 h-4" />
+            </a>
+          </Button>
+        </div>
+      </section>
                 className={`w-full text-left border-b border-border py-6 px-4 flex items-center gap-6 transition-all duration-300 group ${
                   activeDoor === i ? "bg-primary/5" : "hover:bg-muted/50"
                 }`}
