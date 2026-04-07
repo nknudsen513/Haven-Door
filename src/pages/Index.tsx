@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown, DoorOpen, Warehouse, ArrowLeftRight, ChevronsLeftRight, FoldHorizontal, Wrench, Shield, TreePine, Flame, Accessibility } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
@@ -8,7 +8,7 @@ import projectMedical from "@/assets/project-medical.jpg";
 import projectHotelInterior from "@/assets/project-hotel-interior.jpg";
 import projectSchoolInterior from "@/assets/project-school-interior.jpg";
 import projectMedicalInterior from "@/assets/project-medical-interior.jpg";
-import { useRef, useState, type ReactNode } from "react";
+import { useRef, useState } from "react";
 
 const fade = {
   hidden: { opacity: 0, y: 24 },
@@ -43,17 +43,11 @@ const projects = [
   },
 ];
 
-const doorTypes: { name: string; desc: string; icon: ReactNode }[] = [
-  { name: "Commercial Doors", desc: "Heavy-duty solutions for high-traffic spaces", icon: <DoorOpen className="w-6 h-6" /> },
-  { name: "Pre-Hung Doors", desc: "Factory-assembled frames for faster installs", icon: <Warehouse className="w-6 h-6" /> },
-  { name: "Barn Doors", desc: "Rustic sliding hardware for modern interiors", icon: <ArrowLeftRight className="w-6 h-6" /> },
-  { name: "Eliason Doors", desc: "Swinging traffic doors for kitchens & service areas", icon: <ChevronsLeftRight className="w-6 h-6" /> },
-  { name: "Bi-Fold Doors", desc: "Space-saving folding panel systems", icon: <FoldHorizontal className="w-6 h-6" /> },
-  { name: "Hollow Metal Doors", desc: "Steel frames built for durability & fire-rating", icon: <Shield className="w-6 h-6" /> },
-  { name: "Wood Doors", desc: "Solid core & veneer options for every finish", icon: <TreePine className="w-6 h-6" /> },
-  { name: "Fire-Rated Doors", desc: "Code-compliant doors for life safety", icon: <Flame className="w-6 h-6" /> },
-  { name: "ADA-Compliant Doors", desc: "Accessible hardware & closers for every occupant", icon: <Accessibility className="w-6 h-6" /> },
-  { name: "All Required Hardware", desc: "Hinges, closers, locksets — the works", icon: <Wrench className="w-6 h-6" /> },
+const doorTypes = [
+  "Commercial Doors", "Pre-Hung Doors", "Barn Doors", "Eliason Doors",
+  "Bi-Fold Doors", "Hollow Metal Doors", "Wood Doors", "Fire-Rated Doors",
+  "ADA-Compliant Doors", "Solid Core Doors", "Hollow Core Doors",
+  "Storefront Entrances", "Service Doors", "All Required Hardware",
 ];
 
 const Index = () => {
@@ -196,38 +190,42 @@ const Index = () => {
               From schools to hotels, we supply and install every type of commercial door and the hardware to match.
             </p>
           </motion.div>
-          <div className="relative min-h-[320px] md:min-h-[380px]">
-            {doorTypes.map((door, i) => {
-              // Hand-placed positions for an organic cloud layout
+          <div className="relative min-h-[420px] md:min-h-[480px]">
+            {doorTypes.map((name, i) => {
               const placements = [
-                { top: "0%", left: "10%", scale: 1.1 },
-                { top: "2%", left: "55%", scale: 0.95 },
-                { top: "22%", left: "0%", scale: 0.9 },
-                { top: "20%", left: "38%", scale: 1.15 },
-                { top: "18%", left: "75%", scale: 0.85 },
-                { top: "42%", left: "8%", scale: 1.05 },
-                { top: "44%", left: "48%", scale: 0.9 },
-                { top: "62%", left: "2%", scale: 0.95 },
-                { top: "60%", left: "35%", scale: 1.1 },
-                { top: "64%", left: "70%", scale: 0.88 },
+                { top: "0%", left: "12%", scale: 1.1 },
+                { top: "1%", left: "52%", scale: 0.92 },
+                { top: "12%", left: "78%", scale: 0.85 },
+                { top: "18%", left: "0%", scale: 0.95 },
+                { top: "20%", left: "34%", scale: 1.18 },
+                { top: "32%", left: "65%", scale: 0.9 },
+                { top: "38%", left: "5%", scale: 1.05 },
+                { top: "42%", left: "40%", scale: 0.88 },
+                { top: "50%", left: "72%", scale: 1.0 },
+                { top: "55%", left: "15%", scale: 0.93 },
+                { top: "60%", left: "48%", scale: 1.12 },
+                { top: "68%", left: "0%", scale: 0.86 },
+                { top: "72%", left: "30%", scale: 0.95 },
+                { top: "70%", left: "68%", scale: 1.08 },
               ];
-              const p = placements[i % placements.length];
+              const p = placements[i];
               return (
                 <motion.div
-                  key={door.name}
-                  className="absolute group"
+                  key={name}
+                  className="absolute group cursor-default"
                   style={{ top: p.top, left: p.left }}
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ scale: 1.15, y: -4, transition: { duration: 0.25 } }}
                 >
                   <div
-                    className="px-6 py-3.5 md:px-7 md:py-4 rounded-full border border-border/60 bg-card/80 backdrop-blur-sm hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 cursor-default shadow-[0_2px_20px_-4px_hsl(var(--primary)/0.1)] hover:shadow-[0_8px_30px_-4px_hsl(var(--primary)/0.3)]"
+                    className="px-5 py-3 md:px-7 md:py-3.5 rounded-full border border-border/40 bg-card/60 backdrop-blur-md group-hover:bg-primary group-hover:border-primary transition-all duration-300 shadow-[0_2px_16px_-4px_hsl(var(--primary)/0.08)] group-hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.4)]"
                     style={{ transform: `scale(${p.scale})` }}
                   >
-                    <p className="font-heading text-sm md:text-base group-hover:text-primary-foreground transition-colors whitespace-nowrap">
-                      {door.name}
+                    <p className="font-heading text-sm md:text-base text-foreground/80 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                      {name}
                     </p>
                   </div>
                 </motion.div>
