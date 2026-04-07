@@ -145,7 +145,7 @@ const Index = () => {
               About us
             </p>
             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
-              Straightforward people doing honest work
+              Committed to excellence
             </h2>
           </motion.div>
           <motion.div
@@ -157,10 +157,10 @@ const Index = () => {
             custom={1}
           >
             <p>
-              Haven Door Installation has been serving Nashville and beyond since 2018. We work with general contractors on schools, medical facilities, office buildings, and hotels across Tennessee, South Carolina, and Florida.
+              Haven Door Installation is a leading and reputable subcontracting company serving the Nashville area and beyond. Having launched into the industry in 2018, Haven Door Installation has completed schools, medical facilities, office buildings, hotels, and more with many different General Contractors from Tennessee, to South Carolina, to Florida.
             </p>
             <p>
-              We're not the biggest crew out there — but we show up on time, communicate clearly, and do excellent work. Whether it's ten doors or twelve hundred, we treat every project the same.
+              We prioritize clear communication, excellence, and integrity in every job whether it is ten doors or one thousand doors.
             </p>
           </motion.div>
         </div>
