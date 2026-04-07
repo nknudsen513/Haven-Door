@@ -266,7 +266,7 @@ const Index = () => {
           {projects.map((project) => (
             <motion.div
               key={project.title}
-              className="snap-start shrink-0 w-[92%] md:w-[calc(50%-12px)] group"
+              className="snap-start shrink-0 w-[96%] sm:w-[92%] md:w-[calc(50%-12px)] group"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -279,7 +279,7 @@ const Index = () => {
                   loading="lazy"
                   width={960}
                   height={640}
-                  className="w-full aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
+                  className="w-full aspect-[4/5] sm:aspect-[3/2] object-cover transition-opacity duration-500 group-hover:opacity-0"
                 />
                 <img
                   src={project.interiorImage}
