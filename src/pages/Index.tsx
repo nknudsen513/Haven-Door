@@ -45,9 +45,7 @@ const projects = [
 
 const doorTypes = [
   "Commercial Doors", "Pre-Hung Doors", "Barn Doors", "Eliason Doors",
-  "Bi-Fold Doors", "Hollow Metal Doors", "Wood Doors", "Fire-Rated Doors",
-  "ADA-Compliant Doors", "Solid Core Doors", "Hollow Core Doors",
-  "Storefront Entrances", "Service Doors", "All Required Hardware",
+  "Bi-Fold Doors", "All Required Hardware", "Service Doors",
 ];
 
 const Bubble = ({ name, delay }: { name: string; delay: number }) => (
@@ -190,24 +188,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — word cloud */}
+      {/* WHAT WE INSTALL */}
       <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          {/* Row 1 */}
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-4">
-            {doorTypes.slice(0, 4).map((name, i) => (
-              <Bubble key={name} name={name} delay={i * 0.04} />
-            ))}
-          </div>
-          {/* Row 2 */}
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-4">
-            {doorTypes.slice(4, 7).map((name, i) => (
-              <Bubble key={name} name={name} delay={(i + 4) * 0.04} />
-            ))}
-          </div>
-          {/* Center heading */}
+          {/* Heading */}
           <motion.div
-            className="text-center my-8 md:my-10"
+            className="text-center mb-12"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -220,16 +206,10 @@ const Index = () => {
               Every door, done right
             </h2>
           </motion.div>
-          {/* Row 3 */}
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-4">
-            {doorTypes.slice(7, 11).map((name, i) => (
-              <Bubble key={name} name={name} delay={(i + 7) * 0.04} />
-            ))}
-          </div>
-          {/* Row 4 */}
+          {/* Bubbles */}
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-            {doorTypes.slice(11).map((name, i) => (
-              <Bubble key={name} name={name} delay={(i + 11) * 0.04} />
+            {doorTypes.map((name, i) => (
+              <Bubble key={name} name={name} delay={i * 0.04} />
             ))}
           </div>
         </div>
