@@ -331,7 +331,6 @@ const Index = () => {
           <blockquote className="font-heading text-3xl md:text-4xl lg:text-5xl leading-snug italic">
             "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. They work efficiently, don't require constant oversight, and are always a pleasure to work with. I would definitely use Haven again for both small and larger projects."
           </blockquote>
-          </blockquote>
           <div className="mt-8">
             <p className="text-sm font-medium text-primary">Heather</p>
             <p className="text-sm text-muted-foreground">
