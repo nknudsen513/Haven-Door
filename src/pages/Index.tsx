@@ -207,9 +207,14 @@ const Index = () => {
             </h2>
           </motion.div>
           {/* Bubbles */}
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-            {doorTypes.map((name, i) => (
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-3 md:mb-4">
+            {doorTypes.slice(0, 4).map((name, i) => (
               <Bubble key={name} name={name} delay={i * 0.04} />
+            ))}
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
+            {doorTypes.slice(4).map((name, i) => (
+              <Bubble key={name} name={name} delay={(i + 4) * 0.04} />
             ))}
           </div>
         </div>
