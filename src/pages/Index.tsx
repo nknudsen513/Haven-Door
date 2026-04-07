@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown, DoorOpen, Warehouse, SlidersHorizontal, RotateCcw, FoldHorizontal, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
