@@ -398,7 +398,7 @@ const Index = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-background px-6 md:px-10 py-8 text-center text-sm text-muted-foreground">
+      <footer className="surface-dark px-6 md:px-10 py-6 text-center text-sm text-surface-dark-foreground/40 border-t border-surface-dark-foreground/10">
         <p>© {new Date().getFullYear()} Haven Door Installation</p>
       </footer>
     </div>
