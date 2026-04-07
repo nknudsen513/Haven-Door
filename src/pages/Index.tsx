@@ -321,7 +321,7 @@ const Index = () => {
       </section>
 
       {/* WHAT WE INSTALL */}
-      <section className="px-6 md:px-10 py-24 overflow-hidden lg:py-[12px]">
+      <section className="px-6 md:px-10 py-16 md:py-24 overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -351,7 +351,7 @@ const Index = () => {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="px-6 md:px-10 pt-6 pb-24 lg:pt-0 lg:pb-[12px] overflow-hidden">
+      <section className="px-6 md:px-10 py-16 md:py-24 overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="visible"
