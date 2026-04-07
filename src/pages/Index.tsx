@@ -137,11 +137,13 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
           >
-            <Button size="lg" asChild className="rounded-full gap-2 px-8">
-              <a href="#contact">
-                Contact us <ArrowRight className="w-4 h-4" />
-              </a>
-            </Button>
+            <motion.div whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.94 }}>
+              <Button size="lg" asChild className="rounded-full gap-2 px-8">
+                <a href="#contact">
+                  Contact us <ArrowRight className="w-4 h-4" />
+                </a>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
         <motion.div
