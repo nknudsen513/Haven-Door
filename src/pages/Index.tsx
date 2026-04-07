@@ -45,9 +45,7 @@ const projects = [
 
 const doorTypes = [
   "Commercial Doors", "Pre-Hung Doors", "Barn Doors", "Eliason Doors",
-  "Bi-Fold Doors", "Hollow Metal Doors", "Wood Doors", "Fire-Rated Doors",
-  "ADA-Compliant Doors", "Solid Core Doors", "Hollow Core Doors",
-  "Storefront Entrances", "Service Doors", "All Required Hardware",
+  "Bi-Fold Doors", "All Required Hardware", "Service Doors",
 ];
 
 const Bubble = ({ name, delay }: { name: string; delay: number }) => (
