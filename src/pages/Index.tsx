@@ -69,8 +69,32 @@ const Bubble = ({ name, delay }: { name: string; delay: number }) => (
   </motion.div>
 );
 
+const testimonials = [
+  {
+    quote: "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. They work efficiently, don't require constant oversight, and are always a pleasure to work with. I would definitely use Haven again for both small and larger projects.",
+    name: "Heather",
+    company: "Project Manager, Nationwide General Contractor",
+  },
+  {
+    quote: "I have worked with Haven for years now. I have realized it is so much more beneficial to have them focus on doors and hardware which frees up more time for our field staff to govern the other scopes and trades that are on site. Their responsiveness and willingness to help has been incredible. They go above and beyond to help throughout the course of a project, whether that be picking up additional hardware, helping to move doors in a pinch, etc. They are fair on their estimates and easy to communicate with. I do not have anything bad to say about Haven and I look forward to working with them for the many years to come.",
+    name: "Hamilton",
+    company: "Stacker Builders",
+  },
+  {
+    quote: "We have used Haven Door Installation on several of our projects. They do a great job working with our superintendents going out of their way to help them when needed. They are always responsive and work hard to provide excellent customer service.",
+    name: "Ross",
+    company: "Moffitt Builders",
+  },
+  {
+    quote: "I have worked with Jake and the team at Haven Door Installation on a number of projects, big and small, over the last 3+ years and have always found their level of service and quality of their work to be excellent. I am glad to endorse and recommend them for all your door installation needs.",
+    name: "Roy",
+    company: "Baron Construction",
+  },
+];
+
 const Index = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
