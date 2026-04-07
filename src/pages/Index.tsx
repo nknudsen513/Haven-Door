@@ -103,12 +103,12 @@ const Index = () => {
         <div className="flex items-center justify-between px-6 md:px-10 py-4">
           <span className={`font-heading text-2xl tracking-tight transition-colors duration-300 ${scrolled ? "text-foreground" : "text-primary-foreground"}`}>Haven Door</span>
           <div className="flex-1" />
-          <div className={`hidden md:flex items-center gap-8 text-sm mr-6 transition-colors duration-300 ${scrolled ? "text-muted-foreground" : "text-primary-foreground/70"}`}>
+          <div className={`hidden md:flex items-center gap-8 text-base mr-6 transition-colors duration-300 ${scrolled ? "text-muted-foreground" : "text-primary-foreground/70"}`}>
             <a href="#projects" className={`transition-colors ${scrolled ? "hover:text-foreground" : "hover:text-primary-foreground"}`}>Projects</a>
             <a href="#about" className={`transition-colors ${scrolled ? "hover:text-foreground" : "hover:text-primary-foreground"}`}>About</a>
           </div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button size="sm" variant="outline" asChild className={`rounded-full transition-colors duration-300 ${scrolled ? "" : "border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"}`}>
+            <Button size="default" variant="outline" asChild className={`rounded-full transition-colors duration-300 ${scrolled ? "" : "bg-primary text-primary-foreground border-primary hover:bg-primary/90"}`}>
               <a href="#contact">Contact us</a>
             </Button>
           </motion.div>
