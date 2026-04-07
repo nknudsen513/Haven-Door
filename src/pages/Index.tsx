@@ -50,7 +50,27 @@ const doorTypes = [
   "Storefront Entrances", "Service Doors", "All Required Hardware",
 ];
 
-const Index = () => {
+const Bubble = ({ name, delay }: { name: string; delay: number }) => (
+  <motion.div
+    className="group cursor-default"
+    initial={{ opacity: 0, scale: 0.7 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    whileHover={{
+      scale: 1.12,
+      y: -4,
+      transition: { type: "spring", stiffness: 300, damping: 15 },
+    }}
+  >
+    <div className="px-6 py-3 md:px-8 md:py-4 rounded-full border border-border/50 bg-card/70 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-all duration-300 shadow-sm group-hover:shadow-[0_12px_36px_-6px_hsl(var(--primary)/0.4)]">
+      <p className="font-heading text-sm md:text-base text-foreground/70 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+        {name}
+      </p>
+    </div>
+  </motion.div>
+);
+
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
