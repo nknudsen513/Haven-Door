@@ -167,7 +167,7 @@ const Index = () => {
               About us
             </p>
             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl leading-tight">
-              Committed to excellence
+              Committed to <span className="text-primary italic">excellence.</span>
             </h2>
           </motion.div>
           <motion.div
@@ -188,10 +188,14 @@ const Index = () => {
         </div>
       </section>
 
+      {/* DIVIDER */}
+      <div className="px-6 md:px-10">
+        <div className="border-t border-border/50" />
+      </div>
+
       {/* WHAT WE INSTALL */}
       <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          {/* Heading */}
           <motion.div
             className="text-center mb-12"
             initial="hidden"
@@ -206,7 +210,6 @@ const Index = () => {
               Every door, done right
             </h2>
           </motion.div>
-          {/* Bubbles */}
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-3 md:mb-4">
             {doorTypes.slice(0, 4).map((name, i) => (
               <Bubble key={name} name={name} delay={i * 0.04} />
