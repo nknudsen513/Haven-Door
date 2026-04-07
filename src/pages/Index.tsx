@@ -342,7 +342,7 @@ const Index = () => {
             What they say
           </h2>
         </motion.div>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4">
           {[
             {
               quote: "Working with Jake and his crew has been a great experience. They are responsive, quality driven and value their customer. They work efficiently, don't require constant oversight, and are always a pleasure to work with. I would definitely use Haven again for both small and larger projects.",
