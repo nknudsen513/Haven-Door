@@ -50,6 +50,27 @@ const doorTypes = [
   "Storefront Entrances", "Service Doors", "All Required Hardware",
 ];
 
+const Bubble = ({ name, delay }: { name: string; delay: number }) => (
+  <motion.div
+    className="group cursor-default"
+    initial={{ opacity: 0, scale: 0.7 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    viewport={{ once: true }}
+    transition={{ delay, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+    whileHover={{
+      scale: 1.12,
+      y: -4,
+      transition: { type: "spring", stiffness: 300, damping: 15 },
+    }}
+  >
+    <div className="px-6 py-3 md:px-8 md:py-4 rounded-full border border-border/50 bg-card/70 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-all duration-300 shadow-sm group-hover:shadow-[0_12px_36px_-6px_hsl(var(--primary)/0.4)]">
+      <p className="font-heading text-sm md:text-base text-foreground/70 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+        {name}
+      </p>
+    </div>
+  </motion.div>
+);
+
 const Index = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -169,14 +190,24 @@ const Index = () => {
         </div>
       </section>
 
-      {/* WHAT WE INSTALL — scattered bubbles */}
-      <section className="px-6 md:px-10 pb-24 lg:pb-32 overflow-hidden">
-        {/* Desktop: scattered with header in center */}
-        <div className="hidden md:block relative w-full max-w-5xl mx-auto" style={{ height: 520 }}>
-          {/* Center header */}
+      {/* WHAT WE INSTALL — word cloud */}
+      <section className="px-6 md:px-10 py-24 lg:py-32 overflow-hidden">
+        <div className="max-w-5xl mx-auto">
+          {/* Row 1 */}
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-4">
+            {doorTypes.slice(0, 4).map((name, i) => (
+              <Bubble key={name} name={name} delay={i * 0.04} />
+            ))}
+          </div>
+          {/* Row 2 */}
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-4">
+            {doorTypes.slice(4, 7).map((name, i) => (
+              <Bubble key={name} name={name} delay={(i + 4) * 0.04} />
+            ))}
+          </div>
+          {/* Center heading */}
           <motion.div
-            className="absolute z-10 text-center"
-            style={{ top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
+            className="text-center my-8 md:my-10"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -185,88 +216,22 @@ const Index = () => {
             <p className="text-primary text-sm font-medium tracking-widest uppercase mb-3">
               What we install
             </p>
-            <h2 className="font-heading text-5xl lg:text-6xl">
-              Every door,
-              <br />
-              done right
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl">
+              Every door, done right
             </h2>
           </motion.div>
-
-          {/* Bubbles scattered around the header */}
-          {doorTypes.map((name, i) => {
-            // Positions arranged in a ring/cloud around center, avoiding the middle
-            const spots: { x: number; y: number; s: number; r: number }[] = [
-              { x: 0, y: 2, s: 1.1, r: -2 },
-              { x: 22, y: 0, s: 0.95, r: 1 },
-              { x: 55, y: 2, s: 1.0, r: -1 },
-              { x: 80, y: 0, s: 0.9, r: 1.5 },
-              { x: 0, y: 18, s: 0.92, r: 1 },
-              { x: 72, y: 16, s: 1.15, r: -1.5 },
-              { x: 88, y: 18, s: 0.88, r: 0.5 },
-              { x: 0, y: 72, s: 1.05, r: -1 },
-              { x: 18, y: 76, s: 0.9, r: 2 },
-              { x: 74, y: 70, s: 1.08, r: -2 },
-              { x: 88, y: 74, s: 0.92, r: 1 },
-              { x: 4, y: 88, s: 0.95, r: -0.5 },
-              { x: 30, y: 92, s: 1.12, r: 1.5 },
-              { x: 62, y: 90, s: 0.9, r: -1 },
-            ];
-            const spot = spots[i];
-            return (
-              <motion.div
-                key={name}
-                className="absolute group cursor-default"
-                style={{
-                  left: `${spot.x}%`,
-                  top: `${spot.y}%`,
-                  rotate: spot.r,
-                  zIndex: i % 3 === 0 ? 2 : 1,
-                }}
-                initial={{ opacity: 0, scale: 0.4, y: 30 }}
-                whileInView={{ opacity: 1, scale: spot.s, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  delay: i * 0.04,
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                whileHover={{
-                  scale: spot.s * 1.18,
-                  rotate: 0,
-                  y: -6,
-                  zIndex: 10,
-                  transition: { type: "spring", stiffness: 300, damping: 15 },
-                }}
-              >
-                <div className="px-7 py-3.5 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm group-hover:bg-primary group-hover:border-primary transition-colors duration-300 shadow-[0_4px_20px_-6px_hsl(var(--foreground)/0.08)] group-hover:shadow-[0_14px_40px_-8px_hsl(var(--primary)/0.45)]">
-                  <p className="font-heading text-sm md:text-base text-foreground/70 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
-                    {name}
-                  </p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Mobile: flowing flex wrap */}
-        <div className="md:hidden flex flex-wrap justify-center gap-3">
-          {doorTypes.map((name, i) => (
-            <motion.div
-              key={name}
-              className="group cursor-default"
-              initial={{ opacity: 0, scale: 0.7 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.03, duration: 0.4 }}
-              whileHover={{ scale: 1.1, y: -3, transition: { type: "spring", stiffness: 300, damping: 15 } }}
-            >
-              <div className="px-5 py-3 rounded-full border border-border/50 bg-card/80 group-hover:bg-primary group-hover:border-primary transition-colors duration-300 shadow-sm group-hover:shadow-[0_10px_30px_-6px_hsl(var(--primary)/0.4)]">
-                <p className="font-heading text-sm text-foreground/70 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
-                  {name}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+          {/* Row 3 */}
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-4">
+            {doorTypes.slice(7, 11).map((name, i) => (
+              <Bubble key={name} name={name} delay={(i + 7) * 0.04} />
+            ))}
+          </div>
+          {/* Row 4 */}
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
+            {doorTypes.slice(11).map((name, i) => (
+              <Bubble key={name} name={name} delay={(i + 11) * 0.04} />
+            ))}
+          </div>
         </div>
       </section>
 
