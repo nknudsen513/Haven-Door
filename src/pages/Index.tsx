@@ -80,7 +80,7 @@ const Index = () => {
         <div className="flex items-center justify-between px-6 md:px-10 py-4">
           <span className="font-heading text-2xl tracking-tight">Haven Door</span>
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#work" className="hover:text-foreground transition-colors">Work</a>
+            <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
             <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
