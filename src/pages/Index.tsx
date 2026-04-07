@@ -190,38 +190,42 @@ const Index = () => {
               From schools to hotels, we supply and install every type of commercial door and the hardware to match.
             </p>
           </motion.div>
-          <div className="relative min-h-[320px] md:min-h-[380px]">
-            {doorTypes.map((door, i) => {
-              // Hand-placed positions for an organic cloud layout
+          <div className="relative min-h-[420px] md:min-h-[480px]">
+            {doorTypes.map((name, i) => {
               const placements = [
-                { top: "0%", left: "10%", scale: 1.1 },
-                { top: "2%", left: "55%", scale: 0.95 },
-                { top: "22%", left: "0%", scale: 0.9 },
-                { top: "20%", left: "38%", scale: 1.15 },
-                { top: "18%", left: "75%", scale: 0.85 },
-                { top: "42%", left: "8%", scale: 1.05 },
-                { top: "44%", left: "48%", scale: 0.9 },
-                { top: "62%", left: "2%", scale: 0.95 },
-                { top: "60%", left: "35%", scale: 1.1 },
-                { top: "64%", left: "70%", scale: 0.88 },
+                { top: "0%", left: "12%", scale: 1.1 },
+                { top: "1%", left: "52%", scale: 0.92 },
+                { top: "12%", left: "78%", scale: 0.85 },
+                { top: "18%", left: "0%", scale: 0.95 },
+                { top: "20%", left: "34%", scale: 1.18 },
+                { top: "32%", left: "65%", scale: 0.9 },
+                { top: "38%", left: "5%", scale: 1.05 },
+                { top: "42%", left: "40%", scale: 0.88 },
+                { top: "50%", left: "72%", scale: 1.0 },
+                { top: "55%", left: "15%", scale: 0.93 },
+                { top: "60%", left: "48%", scale: 1.12 },
+                { top: "68%", left: "0%", scale: 0.86 },
+                { top: "72%", left: "30%", scale: 0.95 },
+                { top: "70%", left: "68%", scale: 1.08 },
               ];
-              const p = placements[i % placements.length];
+              const p = placements[i];
               return (
                 <motion.div
-                  key={door.name}
-                  className="absolute group"
+                  key={name}
+                  className="absolute group cursor-default"
                   style={{ top: p.top, left: p.left }}
-                  initial={{ opacity: 0, scale: 0.6 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, scale: 0.5, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ scale: 1.15, y: -4, transition: { duration: 0.25 } }}
                 >
                   <div
-                    className="px-6 py-3.5 md:px-7 md:py-4 rounded-full border border-border/60 bg-card/80 backdrop-blur-sm hover:bg-primary hover:border-primary hover:scale-110 transition-all duration-300 cursor-default shadow-[0_2px_20px_-4px_hsl(var(--primary)/0.1)] hover:shadow-[0_8px_30px_-4px_hsl(var(--primary)/0.3)]"
+                    className="px-5 py-3 md:px-7 md:py-3.5 rounded-full border border-border/40 bg-card/60 backdrop-blur-md group-hover:bg-primary group-hover:border-primary transition-all duration-300 shadow-[0_2px_16px_-4px_hsl(var(--primary)/0.08)] group-hover:shadow-[0_12px_40px_-8px_hsl(var(--primary)/0.4)]"
                     style={{ transform: `scale(${p.scale})` }}
                   >
-                    <p className="font-heading text-sm md:text-base group-hover:text-primary-foreground transition-colors whitespace-nowrap">
-                      {door.name}
+                    <p className="font-heading text-sm md:text-base text-foreground/80 group-hover:text-primary-foreground transition-colors whitespace-nowrap">
+                      {name}
                     </p>
                   </div>
                 </motion.div>
