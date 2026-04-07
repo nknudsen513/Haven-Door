@@ -1,10 +1,13 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, ArrowRight, ArrowLeft, ChevronDown, DoorOpen, Warehouse, SlidersHorizontal, RotateCcw, FoldHorizontal, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-door.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectSchool from "@/assets/project-school.jpg";
 import projectMedical from "@/assets/project-medical.jpg";
+import projectHotelInterior from "@/assets/project-hotel-interior.jpg";
+import projectSchoolInterior from "@/assets/project-school-interior.jpg";
+import projectMedicalInterior from "@/assets/project-medical-interior.jpg";
 import { useRef, useState, type ReactNode } from "react";
 
 const fade = {
