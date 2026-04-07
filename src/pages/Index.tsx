@@ -95,10 +95,10 @@ const Index = () => {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/50">
         <div className="flex items-center justify-between px-6 md:px-10 py-4">
           <span className="font-heading text-2xl tracking-tight">Haven Door</span>
-          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
+          <div className="flex-1" />
+          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground mr-6">
             <a href="#projects" className="hover:text-foreground transition-colors">Projects</a>
             <a href="#about" className="hover:text-foreground transition-colors">About</a>
-            <a href="#contact" className="hover:text-foreground transition-colors">Contact</a>
           </div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button size="sm" variant="outline" asChild className="rounded-full">
@@ -320,7 +320,7 @@ const Index = () => {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="px-6 md:px-10 py-24 lg:py-[12px]">
+      <section className="px-6 md:px-10 pt-6 pb-24 lg:pt-0 lg:pb-[12px]">
         <motion.div
           initial="hidden"
           whileInView="visible"
